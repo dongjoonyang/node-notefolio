@@ -2,8 +2,8 @@ var mysql = require('mysql2');
 var db_info = {
     host: 'localhost',
     port: '3306',
-    user: 'root',
-    password: '123456',
+    user: 'user',
+    password: '12345678',
     database: 'notefolio',
     multipleStatements: true // 다중쿼리 사용    
 }
