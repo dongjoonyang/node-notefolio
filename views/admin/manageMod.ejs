@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('head.ejs') %>
+    
+    <script src="/admin/js/manageRegisterMod.js"></script>
+        
+    <!-- summernote edit lib -->
+    <link href="/lib/summernote/summernote-lite.min.css" rel="stylesheet" type="text/css" />
+    <script src="/lib/summernote/summernote-lite.min.js"></script>
+
+</head>
+<body>
+    <div class="wrap">
+        <%-include('nav.ejs') %>
+
+        <header>
+            <div class="toolbar">
+                <div class="toolbar__menu">
+                    <a href="javascript:;">
+                        <i class="fas fa-angle-double-left"></i>
+                        <!-- menu -->
+                        <!-- <i class="fas fa-bars"></i> -->
+                    </a>
+                </div>
+                <div class="toolbar__logout">
+                    <a href="javascript:;">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- action 으로 안넘어가고 스크립트 처리 준비 -->
+        <!-- <form  action="/admin/board/boardUpdateProcess" method="post"> -->
+            <main>
+                <div class="content">
+                    <form id="boardModForm" method="post">
+                        <div class="register">
+                            <div class="register__option">
+                                <div class="register__btn">
+                                    <a href="javascript:;" id="boardCancelBtn" class="btn btn-cancel">취소</a>
+                                    <button type="submit" id="boardModBtn" class="btn btn-confirm">수정</button>
+                                </div>
+                            </div>
+                            
+                            <div class="register__action">
+                                <div class="card register__act">
+                                    <input type="hidden" name="idx" value="<%= idx %>">
+                                    <input type="hidden" name="mainId" value="<%= mainId %>">
+                                    <input type="hidden" name="subId" value="<%= subId %>">
+                                    <% 
+                                    for(let i = 0; i < rows.length; i++) {
+                                        let data = rows[i]; 
+                                    %>
+                                    <textarea id="summerContents" name="contents" class="display-none"><%= data.content %></textarea>
+
+                                    
+                                    <div class="form__groups">
+                                        <label for="registerTitle"><span class="color__important">* </span>제목</label>
+                                        <input id="registerTitle" type="text" name="title" value="<%= data.title %>">
+                                    </div>
+
+                                    <div class="form__groups">
+                                        <p><span class="color__important">* </span>썸네일 이미지</p>
+                                        <div class="filebox bs3-primary preview-image">
+                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                            <label for="inputFile">업로드</label> 
+                                            <input type="file" id="inputFile" name="userfile" class="upload-hidden">
+                                        </div>
+                                    </div>
+                                    <% } %>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card edit">
+                        <p>내용</p>
+                        <div id="summernote"></div>
+                    </div>
+                </div>
+            </main>
+    </div>
+</body>
+</html>

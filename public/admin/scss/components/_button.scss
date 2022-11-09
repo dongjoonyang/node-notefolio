@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+.btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    vertical-align: baseline;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn-primary {
+    background-color: #0053D9;
+    color: #fff;
+    border: 0;
+    &:hover {
+        color: #fff;
+        background-color: #286090;
+        border-color: #204d74;
+    }
+}
+.btn-simple {
+    background: none;
+    color: #333;
+    border: 0;
+    &:hover {
+        color: #0053D9;
+    }
+}
+.btn-block {
+    display: block;
+    width: 100%;
+}
+/* confirm */
+.btn-confirm {
+    border-radius: 4px;
+    background-color: #0053D9;
+    color: #fff;
+    &:hover{
+        color: #fff;
+        background-color: #286090;
+        border-color: #204d74;
+    }
+}
+
+/* cancel */
+.btn-cancel {
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+    &:hover{
+        color: #333;
+        background-color: #eee;
+        border-color: #eee;
+    }
+}

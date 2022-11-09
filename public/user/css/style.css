@@ -1,0 +1,91 @@
+/* 공통 */
+.display-none{display: none;}
+/* 초기화 */
+a{text-decoration: none;}
+/* 네비게이션 */
+.navi{position: relative;height: 50px;line-height: 50px;border-bottom: 1px solid #ddd;}
+.navi a{color: #333; font-weight: bold; font-size: 16px;}
+.navi .logo{position: absolute;left: 20px;}
+.navi ul{display: flex;justify-content: center}
+.navi ul li{padding:0 20px;}
+
+/* 프로필 */
+.profile{padding: 82px 3% 0 3%;}
+.profile img{width: 100%;}
+/* 메인 카테고리 */
+#mainCategory li a{color: #333; font-weight: bold;font-size: 16px;padding: 10px;border-radius: 30px;}
+#mainCategory li a:hover{background-color: #ddd;}
+#mainCategory li a.active{background-color: #212121;color: #fff;}
+
+/* 서브 카테고리 */
+.sub-category{display: flex;justify-content: center;padding: 40px 0;}
+.sub-category li{padding: 0 20px;}
+.sub-category li a{color: #333; font-weight: bold;font-size: 16px;padding: 10px;border-radius: 30px;}
+.sub-category li a:hover{background-color: #ddd;}
+.sub-category li a.active{background-color: #212121;color: #fff;}
+
+/* 리스트 */
+.note{min-height: 1000px;padding: 82px 3% 0 3%;}
+.note-list *{color: #333;}
+.note-list{display: flex;flex-wrap: wrap;}
+.note-list .note-item{border-radius: 5px;border: 1px solid #ddd;margin: 10px;}
+.note-list .note-item a{display: flex;flex-direction: column;}
+.note-list .note-item .note-img{width: 350px; height: 350px; overflow: hidden;border-radius: 5px; background-color: #eee;}
+.note-list .note-item .note-img img{width: 100%;border-radius: 5px;}
+.note-list .note-item .note-info{padding: 10px 20px;height: 40px; line-height: 40px;}
+/* 페이지 */
+.note-page{width: 100%;margin-top: 20px;}
+.note-page ul{display: flex;justify-content: center;}
+.note-page ul li a{display: flex;align-items: center;justify-content: center;width: 24px;height: 24px;line-height: 25px;color: #212121;border-radius: 3px;}
+.note-page ul li.active a{background-color: #333;color: #fff;}
+
+/*** ========================================================================== 
+ * 팝업
+ * ========================================================================== */
+.layer-n {
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+.layer-n .layer-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+    background-color: #fff;
+    border-radius: 3px;
+}
+.layer-n .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+.layer-n .pop-close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 16px;
+    color: #333;
+	margin-left: auto;
+	position: relative;
+	display: inline-block;
+}
+.layer-n .pop-wrap{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff; 
+	border-radius: 5px;
+}
+.pop-area{width: 900px;}
+.pop-area img{width: 100%}

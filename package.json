@@ -1,0 +1,38 @@
+{
+  "name": "notefolio",
+  "version": "1.0.0",
+  "description": "��H\u0000e\u0000l\u0000l\u0000o\u0000 \u0000n\u0000o\u0000t\u0000e\u0000f\u0000o\u0000l\u0000i\u0000o\u0000!\u0000\r\u0000 \u0000",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boystorm/notefolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boystorm/notefolio/issues"
+  },
+  "homepage": "https://github.com/boystorm/notefolio#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "multer": "^1.4.4-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,0 +1,56 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+/* login */
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    .login-wrap{
+        width: 300px;
+        .login-title {
+            margin: 0 0 30px 0;
+            text-align: center;
+            h1 {
+                font: {
+                    size: 22px;
+                    weight: bold;
+                }
+            }
+            p {
+                font-size: 14px;
+                color: #888;
+                margin-top: 10px;
+            }
+        }
+        form {
+            margin-bottom: 10px;
+            .form-box {
+                margin-bottom: 15px;
+                input {
+                    height: 40px;
+                    margin-bottom: -1px;
+                    border-color: #E0E0E0;
+                    padding: 0 12px;
+                    line-height: 40px;
+                    border: 1px solid #ddd;
+                    font-size: 14px;
+                    width: 100%;
+                }
+            }
+        }
+        .login-txt {
+            display: flex;
+            font-size: 12px;
+            input {
+                margin-right: 5px;
+            }
+            a {
+                margin-left: auto;
+                color: #1A6DFF;
+            }
+        }
+    }
+}
