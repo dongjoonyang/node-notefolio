@@ -8,7 +8,7 @@ function fnProfileInitList(){
 
     let profile = '';
     profile += "<h1>양반김 프로필</h1>";
-    profile += "<img src='/images/bg.jpg'>";
+    // profile += "<img src='/images/bg.jpg'>";
     $("#profile").append(profile);
 }
 /**
@@ -114,7 +114,7 @@ function fnNoteList(json){
     $("#noteList").empty(); // 리스트 비우기
 
     /* 전체 리스트 데이터 추출 */
-    for(var i = (json.page * json.page_num) - json.page_num; i < (json.page * json.page_num); i++) {
+    for(let i = (json.page * json.page_num) - json.page_num; i < (json.page * json.page_num); i++) {
         if(i > json.length){
             i++;
         }else{
@@ -167,6 +167,27 @@ function fnNoteListPage(json, mainId, subId){
 $(function() {
     fnCategoryInitList(); // 상단 헤더
     fnProfileInitList(); // 프로필 화면
+
+    /**
+    * =======================================
+    * 설  명 : 바닥 감지 
+    * =======================================
+    */
+    //추가될 이미지 태그를 문자열로 변수에 저장
+    let imgs = '<img src="https://t1.daumcdn.net/cfile/tistory/9940D03D5A584CCD0C"><br />';
+    imgs += '<img src="https://t1.daumcdn.net/cfile/tistory/99F7323D5A584CCE1C"><br />';
+    imgs += '<img src="https://t1.daumcdn.net/cfile/tistory/99E6DF3E5A584CD311"><br />';
+
+     $(document).on("scroll",function(){
+        console.log("1111");
+        let scrollT = $(this).scrollTop(); //스크롤바의 상단위치
+        let scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
+        let contentH = $('#noteList').height(); //문서 전체 내용을 갖는 div의 높이
+        if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때
+            $('#noteList').append(imgs);
+        }
+    });
+
     
     /**
     * =======================================
