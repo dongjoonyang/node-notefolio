@@ -88,16 +88,16 @@ function fnNoteCate(json){
     $("#subCategory").empty(); // 카테고리 비우기
     
     if(json.mainId == 1){
-        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + ">Project ALL</a></li>";
+        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + "  data-page=" + 1 + ">Project ALL</a></li>";
     }else{
-        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + ">Artwork ALL</a></li>";
+        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + "  data-page=" + 1 + ">Artwork ALL</a></li>";
     }
 
     /* 서브 카테고리 */
     for(i = 0; i < json.rows2.length ; i++){
         let data = json.rows2[i];
         if(data.main_id == json.mainId){
-            notefolioCate += "<li><a href='javascript:;' data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + ">" + data.sub_title + "</a></li>";
+            notefolioCate += "<li><a href='javascript:;' data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + "  data-page=" + 1 + ">" + data.sub_title + "</a></li>";
         }
     };
 
@@ -164,31 +164,61 @@ function fnNoteListPage(json, mainId, subId){
     $("#notePage").append(notefolioPage);
 }
 
+/**
+* =======================================
+* 설  명 : 바닥 감지 이벤트
+* =======================================
+*/
+function fnInfinityScroll() {
+    console.log("ok");
+    let flag = true;
+     $(document).on("scroll", function(){
+        let mainId = $("#subCategory .active").data("mainId");
+        let subId = $("#subCategory .active").data("subId");
+        let page = $("#subCategory .active").data("page");
+        
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
+            if(flag == true){
+                if(subId == undefined){ // All click
+                    $.ajax({
+                        type : "get",
+                        url : "/" + mainId + "/page/" + (page = page + 1),
+                        dataType : "JSON",
+                    })
+                    .done(function(json){
+                        fnNoteList(json);
+                        fnNoteListPage(json, mainId);
+                    })
+                    .fail(function(request, status, error){
+                        console.log("페이징 불러오기 Ajax failed");
+                    });
+                    
+                }else{
+                    $.ajax({
+                        type : "get",
+                        url : "/main/" + mainId + "/sub/" + subId + "/page/" + page,
+                        dataType : "JSON"
+                    })
+                    .done(function(json){
+                        fnNoteList(json);
+                        fnNoteListPage(json, mainId, subId);
+                    })
+                    .fail(function(xhr, status, errorThrown){
+                        console.log("서브 게시판 및 카테고리 Ajax failed")
+                    });
+                }
+                flag = false;
+            }
+        }
+    });
+}
+
+
 $(function() {
     fnCategoryInitList(); // 상단 헤더
     fnProfileInitList(); // 프로필 화면
-
-    /**
-    * =======================================
-    * 설  명 : 바닥 감지 
-    * =======================================
-    */
-    //추가될 이미지 태그를 문자열로 변수에 저장
-    let imgs = '<img src="https://t1.daumcdn.net/cfile/tistory/9940D03D5A584CCD0C"><br />';
-    imgs += '<img src="https://t1.daumcdn.net/cfile/tistory/99F7323D5A584CCE1C"><br />';
-    imgs += '<img src="https://t1.daumcdn.net/cfile/tistory/99E6DF3E5A584CD311"><br />';
-
-     $(document).on("scroll",function(){
-        console.log("1111");
-        let scrollT = $(this).scrollTop(); //스크롤바의 상단위치
-        let scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
-        let contentH = $('#noteList').height(); //문서 전체 내용을 갖는 div의 높이
-        if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때
-            $('#noteList').append(imgs);
-        }
-    });
-
-    
+    fnInfinityScroll(); // 바닥감지 이벤트
+   
     /**
     * =======================================
     * 설  명 : 서브 리스트 페이징 클릭
@@ -198,7 +228,6 @@ $(function() {
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
         let page = $(this).data("page");
-        
         // 초기화 
         $("#noteList").empty();
         $("#notePage").empty();
@@ -241,14 +270,14 @@ $(function() {
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
         let selfAcive = $(this).hasClass("active");
-
+        
         // 서브 카테고리
         if(!selfAcive){
             $("#subCategory li a").removeClass("active");
             $(this).addClass("active");
         }
 
-        if(subId == undefined){ // All click
+        if(subId == undefined){ 
             $.ajax({
                 type : "get",
                 url : "/" + mainId + "/page/" + 1,
@@ -275,6 +304,8 @@ $(function() {
                 console.log("서브 게시판 및 카테고리 Ajax failed")
             });
         }
+        // 여기 고민 필요 함수 변경해야할듯
+        fnInfinityScroll();
     })
 
     /**

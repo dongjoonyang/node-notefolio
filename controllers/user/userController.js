@@ -5,7 +5,7 @@ const User = require("../../models/user/user");
 exports.manageData = function(req, res){
     let mainId = req.params.mainId;
     let page = req.params.page;
-    
+    console.log(page);
     User.manageData(mainId, function(err, result1, result2, result3){
         if(err){
             res.send(err);
