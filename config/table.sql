@@ -22,7 +22,8 @@ CREATE TABLE `sub_category` (
 );
 
 -- 작가 아이템
-INSERT INTO `author` (id, password) VALUES ('admin', '123456');
+-- admin 패스워드 설정
+INSERT INTO `author` (id, password) VALUES ('admin', '');
 
 -- 메인 카테고리 아이템
 INSERT INTO `main_category` (main_title) VALUES ('project');
