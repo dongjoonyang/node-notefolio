@@ -7,8 +7,8 @@ function fnProfileInitList(){
     $("#note").addClass("display-none");
 
     let profile = '';
-    profile += "<h1>프로필 영역입니다.</h1>";
-    profile += "<img src='https://reefer.eyecargo.com/images/login_v1.jpg'>";
+    profile += "<h1>양반김 프로필</h1>";
+    profile += "<img src='/images/bg.jpg'>";
     $("#profile").append(profile);
 }
 /**
@@ -24,7 +24,7 @@ function fnCategoryInitList(){
     })
     .done(function(json){
         let info = '';
-        info += "<li><a href='/'>프로필</a></li>";
+        info += "<li><a href='/' class='active'>프로필</a></li>";
         for(i = 0; i < json.rows1.length ; i++){
             let data = json.rows1[i];
             info += "<li><a href='javascript:;' data-main-id='" + data.main_id + "'>"+ data.main_title +"</a></li>";
@@ -33,6 +33,14 @@ function fnCategoryInitList(){
 
         /* 포트폴리오 메뉴 */
         $("#mainCategory li a").on("click", function(){     
+            let selfAcive = $(this).hasClass("active");
+
+            // 서브 카테고리
+            if(!selfAcive){
+                $("#mainCategory li a").removeClass("active");
+                $(this).addClass("active");
+            }
+
             /* 프로필 숨김 및 리스트 숨김 해지 */
             $("#profile").addClass("display-none");
             $("#note").removeClass("display-none");  
@@ -111,7 +119,7 @@ function fnNoteList(json){
             i++;
         }else{
             let data = json.rows3[i];
-            notefolio += "<div class='note-item'>";
+            notefolio += "<div class='note-item' data-idx=" + data.idx + " data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + ">";
             notefolio += "<a href='javascript:;'>";
             notefolio += "<div class='note-img'>";
             notefolio += "<img src='"+ data.image +"'>";
@@ -164,7 +172,7 @@ $(function() {
     * =======================================
     * 설  명 : 서브 리스트 페이징 클릭
     * =======================================
-    /* 페이지 클릭 */
+    */
     $(document).on("click", ".note-page li a", function(){
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
@@ -203,6 +211,11 @@ $(function() {
         }
     });
 
+    /**
+    * =======================================
+    * 설  명 : 서브 카테고리 클릭
+    * =======================================
+    */
     $(document).on("click", "#subCategory li a", function(){
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
@@ -242,5 +255,46 @@ $(function() {
             });
         }
     })
-});
 
+    /**
+    * =======================================
+    * 설  명 : 팝업 오픈
+    * =======================================
+    */
+    $(document).on("click", ".note-item", function(){
+        $(".layer-n").css("display","block");
+        $(".pop-area").empty();
+
+        let idx = $(this).data("idx");
+        let mainId = $(this).data("mainId");
+        let subId = $(this).data("subId");
+
+        $.ajax({
+            type : "get",
+            url : "/" + idx + "/" + mainId + "/" + subId,
+            dataType : "JSON"
+        })
+        .done(function(json){
+            /* 데이터 추출 */
+            let notefolioData = "";
+            notefolioData += json.rows[0].content;         
+              
+            $(".pop-area").append(notefolioData);
+
+        })
+        .fail(function(xhr, status, errorThrown){
+            console.log("서브 게시판 및 카테고리 Ajax failed")
+        });
+
+    })
+
+    /**
+    * =======================================
+    * 설  명 : 팝업 닫기
+    * =======================================
+    */
+     $(".layer-n .bg, .layer-n .pop-close").on( "click", function(e) {
+		$(this).closest(".layer-n").fadeOut();
+	});
+    
+});

@@ -1,18 +1,5 @@
 /**
 * =======================================
-* 설  명 : 프로필 화면
-* =======================================
-*/
-function fnProfileInitList(){
-    $("#note").addClass("display-none");
-
-    let profile = '';
-    profile += "<h1>양반김 프로필</h1>";
-    profile += "<img src='/images/bg.jpg'>";
-    $("#profile").append(profile);
-}
-/**
-* =======================================
 * 설  명 : 네비게이션 헤더
 * =======================================
 */
@@ -54,6 +41,21 @@ function fnCategoryInitList(){
     });
     
 }
+
+/**
+* =======================================
+* 설  명 : 프로필 화면
+* =======================================
+*/
+function fnProfileInitList(){
+    $("#note").addClass("display-none");
+
+    let profile = '';
+    profile += "<h1>양반김 프로필</h1>";
+    profile += "<img src='/images/bg.jpg'>";
+    $("#profile").append(profile);
+}
+
 
 /**
 * =======================================
