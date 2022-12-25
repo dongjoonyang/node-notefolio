@@ -16,7 +16,7 @@ User.manageData = function(mainId, off, result){
     let query2 = "SELECT * FROM sub_category;";
     let query3 = `SELECT * FROM board WHERE main_id = ? LIMIT 5 OFFSET ${off}`;
 
-    conn.query(query1 + query2 + query3, [mainId], function(err, res){
+    conn.query(query1 + query2 + query3, [mainId, off], function(err, res){
         if(err){
             result(null, err);
         } else {

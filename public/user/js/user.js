@@ -45,8 +45,8 @@ function fnCategoryInitList(){
             $("#profile").addClass("display-none");
             $("#note").removeClass("display-none");  
 
-            let mainId = $(this).data('mainId');
-            let off = 0;
+            let mainId = $(this).data('mainId'); // 상단 카테고리
+            let off = 0; // 받아올 데이터 시작 넘버
             fnMainCategory(mainId, off);
         });
     })
@@ -70,7 +70,8 @@ function fnMainCategory(mainId, off){
         })
         .done(function(json){
             fnNoteCate(json);
-            fnNoteList(json);
+            fnNoteList(json); // 리스트 목록
+            fnInfinityScroll(json); // 스크롤 시 데이터 호출
         })
         .fail(function(xhr, status, errorThrown){
             console.log("게시판 및 카테고리 Ajax failed")
@@ -111,7 +112,8 @@ function fnNoteCate(json){
 */
 function fnNoteList(json){
     let notefolio= ""; // 리스트
-    $("#noteList").empty(); // 리스트 비우기
+
+    console.log("서브 데이터 :" + JSON.stringify(json));
 
     /* 전체 리스트 데이터 추출 */
     for(let i = 0; i <= json.rows3.length; i++){
@@ -140,55 +142,56 @@ function fnNoteList(json){
 * 설  명 : 바닥 감지 이벤트
 * =======================================
 */
-// function fnInfinityScroll() {
-//     console.log("ok");
-//     let flag = true;
-//      $(document).on("scroll", function(){
-//         let mainId = $("#subCategory .active").data("mainId");
-//         let subId = $("#subCategory .active").data("subId");
-//         let page = $("#subCategory .active").data("page");
+function fnInfinityScroll(json) {
+    let flag = true;
+     $(document).on("scroll", function(){
+        let mainId = $("#subCategory .active").data("mainId");
+        let subId = $("#subCategory .active").data("subId");
         
-//         if($(window).scrollTop() + $(window).height() == $(document).height()) {    
-//             if(flag == true){
-//                 if(subId == undefined){ // All click
-//                     $.ajax({
-//                         type : "get",
-//                         url : "/" + mainId + "/page/" + (page = page + 1),
-//                         dataType : "JSON",
-//                     })
-//                     .done(function(json){
-//                         fnNoteList(json);
-//                         fnNoteListPage(json, mainId);
-//                     })
-//                     .fail(function(request, status, error){
-//                         console.log("페이징 불러오기 Ajax failed");
-//                     });
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
+            console.log("ok");
+            let off = json.off + 5;
+
+            if(flag == true){
+                if(subId == undefined){
+                    $.ajax({
+                        type : "get",
+                        url : "/main/" + mainId + "/off/" + off,
+                        dataType : "JSON",
+                    })
+                    .done(function(json){
+                        console.log("fnInfinity :" + JSON.stringify(json));
+
+                        fnNoteList(json);
+                        fnInfinityScroll(json); // 스크롤 시 데이터 호출            
+                    })
+                    .fail(function(request, status, error){
+                        console.log("페이징 불러오기 Ajax failed");
+                    });
                     
-//                 }else{
-//                     $.ajax({
-//                         type : "get",
-//                         url : "/main/" + mainId + "/sub/" + subId + "/page/" + page,
-//                         dataType : "JSON"
-//                     })
-//                     .done(function(json){
-//                         fnNoteList(json);
-//                         fnNoteListPage(json, mainId, subId);
-//                     })
-//                     .fail(function(xhr, status, errorThrown){
-//                         console.log("서브 게시판 및 카테고리 Ajax failed")
-//                     });
-//                 }
-//                 flag = false;
-//             }
-//         }
-//     });
-// }
+                }else{
+                    $.ajax({
+                        type : "get",
+                        url : "/main/" + mainId + "/sub/" + subId,
+                        dataType : "JSON"
+                    })
+                    .done(function(json){
+                        fnNoteList(json);
+                    })
+                    .fail(function(xhr, status, errorThrown){
+                        console.log("서브 게시판 및 카테고리 Ajax failed")
+                    });
+                }
+                flag = false;
+            }
+        }
+    });
+}
 
 
 $(function() {
     fnCategoryInitList(); // 상단 헤더
     fnProfileInitList(); // 프로필 화면
-    //fnInfinityScroll(); // 바닥감지 이벤트
    
     /**
     * =======================================

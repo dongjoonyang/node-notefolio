@@ -5,6 +5,7 @@ const User = require("../../models/user/user");
 exports.manageData = function(req, res){
     let mainId = req.params.mainId;
     let off = req.params.off;
+    console.log("off:"+off);
     
     User.manageData(mainId, off, function(err, result1, result2, result3){
         if(err){
@@ -17,7 +18,8 @@ exports.manageData = function(req, res){
                 // 게시판
                 rows3 : result3,
                 length : result3.length - 1, // 페이지 넘어갈때를 대비한 수
-                mainId: mainId
+                mainId: mainId,
+                off: Number(off)
             }); 
         }
     });
