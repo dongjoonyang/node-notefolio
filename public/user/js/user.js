@@ -34,6 +34,7 @@ function fnCategoryInitList(){
         /* 포트폴리오 메뉴 */
         $("#mainCategory li a").on("click", function(){     
             let selfAcive = $(this).hasClass("active");
+            $("#noteList").empty(); // 리스트 비우기
 
             // 서브 카테고리
             if(!selfAcive){
@@ -112,7 +113,6 @@ function fnNoteCate(json){
 */
 function fnNoteList(json){
     let notefolio= ""; // 리스트
-
     console.log("서브 데이터 :" + JSON.stringify(json));
 
     /* 전체 리스트 데이터 추출 */
@@ -167,6 +167,7 @@ function fnInfinityScroll(json) {
                     .fail(function(request, status, error){
                         console.log("페이징 불러오기 Ajax failed");
                     });
+                    flag = false;
                 }else{
                     let off = json.off + 5;
                     $.ajax({
@@ -181,8 +182,9 @@ function fnInfinityScroll(json) {
                     .fail(function(xhr, status, errorThrown){
                         console.log("서브 게시판 및 카테고리 Ajax failed")
                     });
+                    flag = false;
                 }
-                flag = false;
+                
             }
         }
     });
@@ -212,21 +214,22 @@ $(function() {
         // 서브 목록 지우기
         $("#noteList").empty();
 
-        if(subId == undefined){ 
+        if(subId == undefined){
+            let off = 0; // offset 초기화
             $.ajax({
                 type : "get",
-                url : "/" + mainId,
+                url : "/main/" + mainId + "/off/" + off,
                 dataType : "JSON"
             })
             .done(function(json){
                 fnNoteList(json);
+                fnInfinityScroll(json); // 스크롤 시 데이터 호출
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("메인 게시판 및 카테고리 Ajax failed")
             });
         }else{
             let off = 0; // offset 초기화
-            console.log(off)
             $.ajax({
                 type : "get",
                 url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
