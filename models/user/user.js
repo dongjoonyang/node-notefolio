@@ -11,12 +11,10 @@ let User = function (){}; // 생성자
 
 
 // 카테고리 쿼리
-User.manageData = function(mainId,result){
+User.manageData = function(mainId, off, result){
     let query1 = "SELECT * FROM main_category;";
     let query2 = "SELECT * FROM sub_category;";
-    // 게시판
-    let query3 = "SELECT idx, image, title, content, date_format(regdate, '%Y-%m-%d %H:%i:%s') regdate," 
-                + "date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, main_id, sub_id FROM board WHERE main_id = ?";
+    let query3 = `SELECT * FROM board WHERE main_id = ? LIMIT 5 OFFSET ${off}`;
 
     conn.query(query1 + query2 + query3, [mainId], function(err, res){
         if(err){

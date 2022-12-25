@@ -9,7 +9,7 @@ const UserController = require('../../controllers/user/userController');
 */
 /* default url : / */ 
 router.get('/', function(req, res, next){ res.render('user/user.ejs'); });
-router.get('/:mainId', UserController.manageData);
+router.get('/main/:mainId/off/:off', UserController.manageData);
 
 /* 카테고리 목록 */
 router.get('/category/data', UserController.catgoryData);

@@ -46,7 +46,8 @@ function fnCategoryInitList(){
             $("#note").removeClass("display-none");  
 
             let mainId = $(this).data('mainId');
-            fnMainCategory(mainId);
+            let off = 0;
+            fnMainCategory(mainId, off);
         });
     })
     .fail(function(xhr, status, errorThrown){
@@ -60,11 +61,11 @@ function fnCategoryInitList(){
 * 설  명 : 메뉴 클릭
 * =======================================
 */
-function fnMainCategory(mainId){
+function fnMainCategory(mainId, off){
     if(mainId != undefined){
         $.ajax({
             type : "get",
-            url : "/" + mainId,
+            url : "/main/" + mainId + "/off/" + off,
             dataType : "JSON"
         })
         .done(function(json){
@@ -87,16 +88,16 @@ function fnNoteCate(json){
     $("#subCategory").empty(); // 카테고리 비우기
     
     if(json.mainId == 1){
-        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + "  data-page=" + 1 + ">Project ALL</a></li>";
+        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + ">Project ALL</a></li>";
     }else{
-        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + "  data-page=" + 1 + ">Artwork ALL</a></li>";
+        notefolioCate += "<li><a href='javascript:;' class='active' data-main-id=" + json.mainId + ">Artwork ALL</a></li>";
     }
 
     /* 서브 카테고리 */
     for(i = 0; i < json.rows2.length ; i++){
         let data = json.rows2[i];
         if(data.main_id == json.mainId){
-            notefolioCate += "<li><a href='javascript:;' data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + "  data-page=" + 1 + ">" + data.sub_title + "</a></li>";
+            notefolioCate += "<li><a href='javascript:;' data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + ">" + data.sub_title + "</a></li>";
         }
     };
 
