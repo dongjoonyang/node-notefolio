@@ -15,7 +15,7 @@ router.get('/main/:mainId/off/:off', UserController.manageData);
 router.get('/category/data', UserController.catgoryData);
 
 /* 서브 카테 게시판 목록 불러오기 */
-router.get('/main/:mainId/sub/:subId', UserController.subBoardData);
+router.get('/main/:mainId/sub/:subId/off/:off', UserController.subBoardData);
 
 /* 게시판 글 읽기 */
 router.get('/:idx/:mainId/:subId', UserController.boardRead);

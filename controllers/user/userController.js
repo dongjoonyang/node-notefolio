@@ -5,7 +5,6 @@ const User = require("../../models/user/user");
 exports.manageData = function(req, res){
     let mainId = req.params.mainId;
     let off = req.params.off;
-    console.log("off:"+off);
     
     User.manageData(mainId, off, function(err, result1, result2, result3){
         if(err){
@@ -43,14 +42,17 @@ exports.catgoryData = function(req, res){
 exports.subBoardData = function(req, res){
     let mainId = req.params.mainId;
     let subId = req.params.subId;
+    let off = req.params.off;
+    console.log(off)
 
-    User.subBoardData(mainId, subId, function(err, result){
+    User.subBoardData(mainId, subId, off, function(err, result){
         if(err){
             res.send(err);
         } else {
             res.send({
                 rows3 : result,
                 length : result.length - 1,
+                off: Number(off)
             });
         }
     });

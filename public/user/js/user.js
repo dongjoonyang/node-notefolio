@@ -144,16 +144,16 @@ function fnNoteList(json){
 */
 function fnInfinityScroll(json) {
     let flag = true;
-     $(document).on("scroll", function(){
+    $(document).on("scroll", function(){
         let mainId = $("#subCategory .active").data("mainId");
         let subId = $("#subCategory .active").data("subId");
         
         if($(window).scrollTop() + $(window).height() == $(document).height()) {    
             console.log("ok");
-            let off = json.off + 5;
 
             if(flag == true){
                 if(subId == undefined){
+                    let off = json.off + 5;
                     $.ajax({
                         type : "get",
                         url : "/main/" + mainId + "/off/" + off,
@@ -161,22 +161,22 @@ function fnInfinityScroll(json) {
                     })
                     .done(function(json){
                         console.log("fnInfinity :" + JSON.stringify(json));
-
                         fnNoteList(json);
                         fnInfinityScroll(json); // 스크롤 시 데이터 호출            
                     })
                     .fail(function(request, status, error){
                         console.log("페이징 불러오기 Ajax failed");
                     });
-                    
                 }else{
+                    let off = json.off + 5;
                     $.ajax({
                         type : "get",
-                        url : "/main/" + mainId + "/sub/" + subId,
+                        url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
                         dataType : "JSON"
                     })
                     .done(function(json){
                         fnNoteList(json);
+                        fnInfinityScroll(json); // 스크롤 시 데이터 호출
                     })
                     .fail(function(xhr, status, errorThrown){
                         console.log("서브 게시판 및 카테고리 Ajax failed")
@@ -209,6 +209,9 @@ $(function() {
             $(this).addClass("active");
         }
 
+        // 서브 목록 지우기
+        $("#noteList").empty();
+
         if(subId == undefined){ 
             $.ajax({
                 type : "get",
@@ -222,13 +225,16 @@ $(function() {
                 console.log("메인 게시판 및 카테고리 Ajax failed")
             });
         }else{
+            let off = 0; // offset 초기화
+            console.log(off)
             $.ajax({
                 type : "get",
-                url : "/main/" + mainId + "/sub/" + subId,
+                url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
                 dataType : "JSON"
             })
             .done(function(json){
                 fnNoteList(json);
+                fnInfinityScroll(json);
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("서브 게시판 및 카테고리 Ajax failed")
@@ -258,7 +264,6 @@ $(function() {
             /* 데이터 추출 */
             let notefolioData = "";
             notefolioData += json.rows[0].content;         
-              
             $(".pop-area").append(notefolioData);
 
         })
@@ -273,7 +278,7 @@ $(function() {
     * 설  명 : 팝업 닫기
     * =======================================
     */
-     $(".layer-n .bg, .layer-n .pop-close").on( "click", function(e) {
+    $(".layer-n .bg, .layer-n .pop-close").on( "click", function(e) {
 		$(this).closest(".layer-n").fadeOut();
 	});
     

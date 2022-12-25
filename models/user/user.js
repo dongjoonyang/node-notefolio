@@ -45,15 +45,13 @@ User.categoryData = function(result){
 };
 
 // 서브 게시판 목록 불러오기
-User.subBoardData = function(mainId, subId, result){
-    let query = "SELECT idx, image, title, content, date_format(regdate, '%Y-%m-%d %H:%i:%s') regdate," 
-                + "date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, main_id, sub_id FROM board WHERE main_id = ? and sub_id = ?";
+User.subBoardData = function(mainId, subId, off, result){
+    let query = `SELECT * FROM board WHERE main_id = ? and sub_id = ? LIMIT 5 OFFSET ${off}`;
 
-    conn.query(query, [mainId, subId], function(err, res){
+    conn.query(query, [mainId, subId, off], function(err, res){
         if(err){
-         result(null, err);
+            result(null, err);
         } else {
-            console.log(res);
             result(null, res);
         }
     });
