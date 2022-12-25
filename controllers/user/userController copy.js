@@ -1,18 +1,5 @@
 const User = require("../../models/user/user");
 
-// 카테고리 관리 컨트롤러
-exports.catgoryData = function(req, res){
-    User.categoryData(function(err, result1, result2){
-        if(err){
-            res.send(err);
-        } else {
-            res.json({
-                rows1 : result1, 
-                rows2 : result2
-            });
-        }
-    });
-};
 
 // 카테고리 메인 리스트 및 메인 게시판 컨트롤러
 exports.manageData = function(req, res){
@@ -34,6 +21,20 @@ exports.manageData = function(req, res){
                 page_num : 10, // 페이지 행 수
                 mainId: mainId
             }); 
+        }
+    });
+};
+
+// 카테고리 관리 컨트롤러
+exports.catgoryData = function(req, res){
+    User.categoryData(function(err, result1, result2){
+        if(err){
+            res.send(err);
+        } else {
+            res.json({
+                rows1 : result1, 
+                rows2 : result2
+            });
         }
     });
 };
