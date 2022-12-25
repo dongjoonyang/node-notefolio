@@ -43,7 +43,6 @@ exports.subBoardData = function(req, res){
     let mainId = req.params.mainId;
     let subId = req.params.subId;
     let off = req.params.off;
-    console.log(off)
 
     User.subBoardData(mainId, subId, off, function(err, result){
         if(err){

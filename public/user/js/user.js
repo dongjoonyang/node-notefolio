@@ -112,8 +112,7 @@ function fnNoteCate(json){
 * =======================================
 */
 function fnNoteList(json){
-    let notefolio= ""; // 리스트
-    console.log("서브 데이터 :" + JSON.stringify(json));
+    let notefolio= ""; // 리스트   
 
     /* 전체 리스트 데이터 추출 */
     for(let i = 0; i <= json.rows3.length; i++){
@@ -150,6 +149,7 @@ function fnInfinityScroll(json) {
         
         if($(window).scrollTop() + $(window).height() == $(document).height()) {    
             console.log("ok");
+            console.log("json.off :" + json.off);
 
             if(flag == true){
                 if(subId == undefined){
@@ -160,14 +160,12 @@ function fnInfinityScroll(json) {
                         dataType : "JSON",
                     })
                     .done(function(json){
-                        console.log("fnInfinity :" + JSON.stringify(json));
                         fnNoteList(json);
                         fnInfinityScroll(json); // 스크롤 시 데이터 호출            
                     })
                     .fail(function(request, status, error){
                         console.log("페이징 불러오기 Ajax failed");
                     });
-                    flag = false;
                 }else{
                     let off = json.off + 5;
                     $.ajax({
@@ -182,10 +180,9 @@ function fnInfinityScroll(json) {
                     .fail(function(xhr, status, errorThrown){
                         console.log("서브 게시판 및 카테고리 Ajax failed")
                     });
-                    flag = false;
                 }
-                
             }
+            flag = false;
         }
     });
 }
@@ -204,6 +201,8 @@ $(function() {
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
         let selfAcive = $(this).hasClass("active");
+        let off = 0;
+        console.log("off :" + off);
         
         // 서브 카테고리
         if(!selfAcive){
