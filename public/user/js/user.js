@@ -113,17 +113,23 @@ function fnNoteList(json){
     $("#noteList").empty(); // 리스트 비우기
 
     /* 전체 리스트 데이터 추출 */
-    let data = json.rows3[i];
-    notefolio += "<div class='note-item' data-idx=" + data.idx + " data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + ">";
-    notefolio += "<a href='javascript:;'>";
-    notefolio += "<div class='note-img'>";
-    notefolio += "<img src='"+ data.image +"'>";
-    notefolio += "</div>";
-    notefolio += "<div class='note-info'>";
-    notefolio += "<p>"+ data.title +"</p>";
-    notefolio += "</div>";
-    notefolio += "</a>";
-    notefolio += "</div>";
+    for(let i = 0; i <= json.rows3.length; i++){
+        if(i > json.length){
+            i++;
+        }else{
+            let data = json.rows3[i];
+            notefolio += "<div class='note-item' data-idx=" + data.idx + " data-main-id=" + data.main_id + "  data-sub-id=" + data.sub_id + ">";
+            notefolio += "<a href='javascript:;'>";
+            notefolio += "<div class='note-img'>";
+            notefolio += "<img src='"+ data.image +"'>";
+            notefolio += "</div>";
+            notefolio += "<div class='note-info'>";
+            notefolio += "<p>"+ data.title +"</p>";
+            notefolio += "</div>";
+            notefolio += "</a>";
+            notefolio += "</div>";
+        }
+    }
 
     $("#noteList").append(notefolio);
 }
