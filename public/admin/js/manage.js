@@ -741,10 +741,13 @@ $(function() {
      * =======================================
      */
     $("#boardNumResetBtn").on("click", function(){
-        $.ajax({
-            type : "put",
-            url : "/admin/manage/update",
-        })
+        let result = confirm("순번을 초기화 하시겠습니까? \n초기화 하여도 데이터가 삭제되거나 하지 않습니다. \n!중요! 순서의 불변함을 위해 모든 데이터가 삭제 후 초기화 하시는걸 추천 드립니다. \n초기화 후 새로고침을 해야 적용됩니다.");
+        if(result){
+            $.ajax({
+                type : "put",
+                url : "/admin/manage/update",
+            })
+        }
     });
 });
 
