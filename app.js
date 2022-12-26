@@ -1,5 +1,5 @@
 // 1) 서버킴 : notefolio 폴더에서 npm run dev : 3000
-// 2) 사스 : admin 폴더에서 node-sass --watch scss/main.scss css/main.css
+// 2) 사스 : public > admin 폴더에서 node-sass --watch scss/main.scss css/main.css
 
 /**
  * =======================================
