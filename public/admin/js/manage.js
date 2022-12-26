@@ -737,13 +737,14 @@ $(function() {
 
     /**
      * =======================================
-     * 설  명 : 상세페이지 이동(글수정)
+     * 설  명 : 테이블 순번(인덱스) 초기화
      * =======================================
      */
-    // $("#modBoardBtn").on("click", function(){
-        
-    // })
-
-
+    $("#boardNumResetBtn").on("click", function(){
+        $.ajax({
+            type : "put",
+            url : "/admin/manage/update",
+        })
+    });
 });
 

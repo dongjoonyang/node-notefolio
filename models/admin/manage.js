@@ -105,4 +105,17 @@ Manage.manageSubBoardData = function(mainId, subId, result){
     });
 };
 
+// 인덱스 리셋
+Manage.manageNumReset = function(result){
+    let query1 = "SET @num := 0;" ;
+    let query2 = "UPDATE board SET idx = @num := (@num+1);";
+    let query3 = "ALTER TABLE board AUTO_INCREMENT =1;";
+
+    conn.query(query1 + query2 + query3, function(err, res){
+        if(err){
+           console.log(err);
+        }
+    });
+};
+
 module.exports = Manage;

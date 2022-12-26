@@ -30,5 +30,7 @@ router.get('/main/:mainId/page/:page', ManageController.manageMainBoardData);
 /* 서브 카테 게시판 목록 불러오기 */
 router.get('/main/:mainId/sub/:subId/page/:page', ManageController.manageSubBoardData);
 
+/* 테이블 순번(인덱스) 초기화 */
+router.put('/update', ManageController.manageNumReset);
 
 module.exports = router;

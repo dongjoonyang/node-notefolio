@@ -118,3 +118,14 @@ exports.manageSubBoardData = function(req, res){
         }
     });
 }
+
+// 테이블 순번(인덱스) 초기화
+exports.manageNumReset = function(req, res){
+    Manage.manageNumReset("",function(err, result){
+        if(err){
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+}
