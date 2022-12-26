@@ -25,7 +25,7 @@ a{text-decoration: none;}
 .sub-category li a.active{background-color: #212121;color: #fff;}
 
 /* 리스트 */
-.note{min-height: 1000px;padding: 82px 3% 0 3%;}
+.note{padding: 82px 3% 0 3%;}
 .note-list *{color: #333;}
 .note-list{display: flex;flex-wrap: wrap;}
 .note-list .note-item{border-radius: 5px;border: 1px solid #ddd;margin: 10px;}

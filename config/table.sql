@@ -49,4 +49,4 @@ CREATE TABLE `board`(
 
 -- 메인 게시판 아이템
 INSERT INTO `board`(`image`,`title`,`content`,`regdate`,`modidate`,`main_id`,`sub_id`)
-VALUES ('image.png','제목','내용','2022-05-01 15:42:00','2022-05-01 15:43:00','1','');
+VALUES ('image.png','제목','내용','2022-05-01 15:42:00','2022-05-01 15:43:00','1','1');

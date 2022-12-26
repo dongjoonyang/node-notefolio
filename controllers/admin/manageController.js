@@ -17,7 +17,7 @@ exports.manageData = function(req, res){
                 rows3 : result3,
                 page : page, // page 번호
                 length : result3.length - 1, // 페이지 넘어갈때를 대비한 수
-                page_num : 10 // 페이지 행 수
+                page_num : 5 // 페이지 행 수
             }); 
         }
     });
@@ -91,7 +91,7 @@ exports.manageMainBoardData = function(req, res){
                 rows : result,
                 page : page, 
                 length : result.length - 1,
-                page_num : 10,
+                page_num : 5,
                 category : "main"
             });
         }
@@ -112,7 +112,7 @@ exports.manageSubBoardData = function(req, res){
                 rows : result,
                 page : page, 
                 length : result.length - 1,
-                page_num : 10,
+                page_num : 5,
                 category : "sub"
             });
         }
