@@ -404,7 +404,7 @@ main{
                     margin-bottom: 15px;
                 }
                 .register__act {
-                    width: 79%;
+                    width: 100%;
                     padding: 20px;
                 }
                 .form__groups {
@@ -417,9 +417,15 @@ main{
                         margin-bottom: 10px;
                     }
                     label {
+                        width: 100%;
                         font-weight: bold;
                         font-size: 16px;
                         margin-bottom: 10px;
+                    }
+                    .preview-image {
+                        label {
+                            text-align: center;
+                        }
                     }
                     input {
                         border-radius: 4px;
@@ -427,14 +433,15 @@ main{
                         height: 40px;
                         border: 1px solid #ddd;
                         padding: 0 15px;
-                        width: 500px;
+                        width: 100%;
+                        margin-bottom: 10px;
                     }
                 }
             }
         }
         /* edit */
         .edit{
-            width: 79%;
+            width: 100%;
             padding: 20px;
             p{
                 font-weight: bold;
@@ -742,7 +749,7 @@ main{
 }
 .filebox {
     input[type="file"] {
-        position: absolute;
+        position: fixed;
         width: 1px;
         height: 1px;
         padding: 0;

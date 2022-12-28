@@ -888,7 +888,7 @@ main {
         font-size: 16px;
         margin-bottom: 15px; }
       main .content .register .register__action .register__act {
-        width: 79%;
+        width: 100%;
         padding: 20px; }
       main .content .register .register__action .form__groups {
         display: flex;
@@ -899,18 +899,22 @@ main {
           font-size: 16px;
           margin-bottom: 10px; }
         main .content .register .register__action .form__groups label {
+          width: 100%;
           font-weight: bold;
           font-size: 16px;
           margin-bottom: 10px; }
+        main .content .register .register__action .form__groups .preview-image label {
+          text-align: center; }
         main .content .register .register__action .form__groups input {
           border-radius: 4px;
           color: #888;
           height: 40px;
           border: 1px solid #ddd;
           padding: 0 15px;
-          width: 500px; }
+          width: 100%;
+          margin-bottom: 10px; }
     main .content .edit {
-      width: 79%;
+      width: 100%;
       padding: 20px; }
       main .content .edit p {
         font-weight: bold;
@@ -1169,7 +1173,7 @@ main {
   /* named upload */
   /* imaged preview */ }
   .filebox input[type="file"] {
-    position: absolute;
+    position: fixed;
     width: 1px;
     height: 1px;
     padding: 0;
