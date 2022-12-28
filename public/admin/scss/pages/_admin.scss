@@ -880,6 +880,28 @@ main{
                 min-width: auto;
                 width: 100%;
             }
+            .register {
+                .register__action {
+                    .register__act {
+                        width: 100%;
+                    }
+                    .form__groups {
+                        input {
+                            width: 100%;
+                        }
+                        .preview-image {
+                            label {
+                                width: 100%;
+                                text-align: center;
+                                margin-top: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+            .edit {
+                width: 100%;
+            }
         }
     }
     .mng__table {

@@ -1268,6 +1268,16 @@ main {
     main .content .member-modify {
       min-width: auto;
       width: 100%; }
+    main .content .register .register__action .register__act {
+      width: 100%; }
+    main .content .register .register__action .form__groups input {
+      width: 100%; }
+    main .content .register .register__action .form__groups .preview-image label {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px; }
+    main .content .edit {
+      width: 100%; }
   .mng__table table thead tr th:nth-child(1) {
     width: 10%; }
   .mng__table table thead tr th:nth-child(2) {
