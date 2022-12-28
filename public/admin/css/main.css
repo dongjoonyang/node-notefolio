@@ -1098,6 +1098,8 @@ main {
       .modal .modal__mod .modal__mod--kinds label {
         margin-right: 10px; }
   .modal .modal__tree--list {
+    max-height: 300px;
+    overflow: auto;
     font-size: 14px; }
     .modal .modal__tree--list .modal__tree--item {
       display: flex;
@@ -1263,6 +1265,9 @@ main {
       min-width: auto; }
     main .content .mng .mng__data .mng__option {
       margin-bottom: 2%; }
+    main .content .member-modify {
+      min-width: auto;
+      width: 100%; }
   .mng__table table thead tr th:nth-child(1) {
     width: 10%; }
   .mng__table table thead tr th:nth-child(2) {
@@ -1286,7 +1291,29 @@ main {
   .mng__table table tbody tr td:nth-child(5) {
     display: none; }
   .mng__table table tbody tr td:nth-child(6) {
-    display: none; } }
+    display: none; }
+  .modal .modal__category {
+    min-height: auto;
+    height: 100vh; }
+  .modal .modal__dialog--centered {
+    min-height: 100vh; }
+  .modal .modal__dialog {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    transform: none; }
+  .modal .modal__body {
+    flex-direction: column;
+    justify-content: flex-start; }
+    .modal .modal__body .modal__tree {
+      width: 100%;
+      border-bottom: 1px solid #ddd; }
+  .modal .modal__tree--list .modal__tree--item {
+    display: inline-block;
+    border: 1px solid #ddd;
+    margin-right: 1%; }
+    .modal .modal__tree--list .modal__tree--item span {
+      padding-right: 40px; } }
 
 @media only all and (max-width: 320px) {
   .mng__table--box thead {
@@ -1304,7 +1331,9 @@ main {
     transition: font-size .3s; }
   main .content .mng .mng__data .mng__table table tbody tr td a .mng__table--thumb {
     width: 40px;
-    height: 40px; } }
+    height: 40px; }
+  .modal .modal__tree--list {
+    max-height: 200px; } }
 
 /*!
  * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com

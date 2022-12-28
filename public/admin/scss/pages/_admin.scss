@@ -647,6 +647,8 @@ main{
     */
 
     .modal__tree--list{
+        max-height: 300px;
+        overflow: auto;
         font: {
             size: 14px;
         }
@@ -874,6 +876,10 @@ main{
                     }
                 }
             }
+            .member-modify {
+                min-width: auto;
+                width: 100%;
+            }
         }
     }
     .mng__table {
@@ -928,6 +934,39 @@ main{
             }
         }
     }
+    .modal {
+        .modal__category {
+            min-height: auto;
+            height: 100vh;
+        }
+        .modal__dialog--centered {
+            min-height: 100vh;
+        }
+        .modal__dialog {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            transform: none;
+        }
+        .modal__body {
+            flex-direction: column;
+            justify-content: flex-start;
+            .modal__tree {
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+        .modal__tree--list {
+            .modal__tree--item {
+                display: inline-block;
+                border: 1px solid #ddd;
+                margin-right: 1%;
+                span {
+                    padding-right: 40px;
+                }
+            }
+        }
+    }
 }
 
 @include respond-to('small'){ // max-width: 320px
@@ -971,6 +1010,11 @@ main{
                     }
                 }
             }
+        }
+    }
+    .modal {
+        .modal__tree--list {
+            max-height: 200px;
         }
     }
 }
