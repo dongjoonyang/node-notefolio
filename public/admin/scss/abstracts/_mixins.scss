@@ -32,3 +32,14 @@
   }
 }
 
+/// Responsive breakpoint
+@mixin respond-to($name){
+  @if map-has-key($breakpoints, $name) {
+    @media only all and#{inspect(map-get($breakpoints,$name))}{
+      @content;
+    }
+  }
+  @else{
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoints}`. Please make sure it is defined in `$breakpoints` map.";
+  }
+}

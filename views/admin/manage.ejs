@@ -10,18 +10,8 @@
 
         <header>
             <div class="toolbar">
-                <div class="toolbar__menu">
-                    <a href="javascript:;">
-                        <i class="fas fa-angle-double-left"></i>
-                        <!-- menu -->
-                        <!-- <i class="fas fa-bars"></i> -->
-                    </a>
-                </div>
-                <div class="toolbar__logout">
-                    <a href="/admin/logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </div>
+                <%-include('menu.ejs') %>
+                <%-include('logout.ejs') %>
             </div>
         </header>
 
@@ -118,8 +108,8 @@
                                                 <th scope="col">제목</th>
                                                 <th scope="col">작성일</th>
                                                 <th scope="col">수정일</th>
-                                                <th scope="col">메인 카테고리</th>
-                                                <th scope="col">서브 카테고리</th>
+                                                <th scope="col">메인</th>
+                                                <th scope="col">서브</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -182,7 +172,6 @@
         <!-- Category Manager Pop Up -->
         <form id="categoryForm" autocomplete="off">
             <fieldset>
-                <legend>Choose your Category</legend>
                 <div class="modal fade display-none"><!-- display-none -->
                     <div class="modal__dialog modal__dialog--centered">
                         <div class="modal__content modal__category">

@@ -104,4 +104,52 @@ $(function($){
     //fnLayerOpenInit(); // 공통 팝업 오픈 이벤트 함수
     fnValidateInit(); // 유효성 검사
     fnNavInit(); // 
+
+    /**
+     * =======================================
+     * 설  명 : 메뉴 접고/펼치기
+     * =======================================
+     */
+     $("#sideMenuBtn").on("click", function(){
+        let respon = $("nav").hasClass("respon");
+
+        let width = $(window).width();
+        let menuWidth = "1280";
+        let menu = $("nav").hasClass("menu");
+        
+        if(!respon) {
+            $("nav").addClass("respon");
+            $(".toolbar").addClass("respon");
+            $("main").addClass("respon");
+        }else{
+            $("nav").removeClass("respon");
+            $(".toolbar").removeClass("respon");
+            $("main").removeClass("respon");
+        }
+
+        if(width <= menuWidth) {
+            if(!menu) {
+                $("nav").addClass("menu");
+                $(".toolbar__menu--btn").addClass("respon");
+            }else{
+                $("nav").removeClass("menu");
+                $(".toolbar__menu--btn").removeClass("respon");
+            }
+        }
+    })
+
+    /**
+     * =======================================
+     * 설  명 : 리사이즈 모두 초기화
+     * =======================================
+     */
+    $(window).resize(function(){
+        let width = $(window).width();
+        $("nav").removeClass("respon");
+        $(".toolbar").removeClass("respon");
+        $("main").removeClass("respon");
+        $("nav").removeClass("menu");
+        $(".toolbar__menu--btn").removeClass("respon");
+    })
+
 });

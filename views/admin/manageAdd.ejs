@@ -16,18 +16,8 @@
 
         <header>
             <div class="toolbar">
-                <div class="toolbar__menu">
-                    <a href="javascript:;">
-                        <i class="fas fa-angle-double-left"></i>
-                        <!-- menu -->
-                        <!-- <i class="fas fa-bars"></i> -->
-                    </a>
-                </div>
-                <div class="toolbar__logout">
-                    <a href="javascript:;">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </div>
+                <%-include('menu.ejs') %>
+                <%-include('logout.ejs') %>
             </div>
         </header>
         <!-- action="/admin/board/boardAddProcess" method="post" enctype="multipart/form-data"-->
