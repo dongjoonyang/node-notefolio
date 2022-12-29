@@ -161,7 +161,7 @@ function fnMainInfinityScroll(json) {
                         })
                         .done(function(json){
                             fnNoteList(json);
-                            fnMainInfinityScroll(json);    
+                            fnMainInfinityScroll(json)
                         })
                         .fail(function(request, status, error){
                             console.log("페이징 불러오기 Ajax failed");
@@ -180,10 +180,11 @@ function fnMainInfinityScroll(json) {
 * =======================================
 */
 function fnSubInfinityScroll(json) {
+    
     let isScroll = true;
     console.log("sub infinity scroll :" + json.off);
 
-    $(document).on("scroll", function(){
+    $(document).on("scroll", function(event){
         let mainId = $("#subCategory .active").data("mainId");
         let subId = $("#subCategory .active").data("subId");
 
@@ -193,6 +194,7 @@ function fnSubInfinityScroll(json) {
                     if(json.length !== -1) {
                         off = json.off + 5;
                         console.log("스크롤 탄 off :" + off);
+                        console.log("isScroll : " + isScroll);
                         $.ajax({
                             type : "get",
                             url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
@@ -200,7 +202,7 @@ function fnSubInfinityScroll(json) {
                         })
                         .done(function(json){
                             fnNoteList(json);
-                            fnSubInfinityScroll(json); // 스크롤 시 데이터 호출
+                            fnSubInfinityScroll(json)
                         })
                         .fail(function(xhr, status, errorThrown){
                             console.log("서브 게시판 및 카테고리 Ajax failed")
@@ -255,7 +257,6 @@ $(function() {
             });
         }else{
             let off = 0; // offset 초기화
-            // off 초기화 이상무
             $.ajax({
                 type : "get",
                 url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
@@ -264,7 +265,7 @@ $(function() {
             .done(function(json){
                 fnNoteList(json);
                 console.log("sub json.off ::::: " + json.off)
-                fnSubInfinityScroll(json);
+                fnSubInfinityScroll(json)                                
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("서브 게시판 및 카테고리 Ajax failed")
