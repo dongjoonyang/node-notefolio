@@ -48,6 +48,7 @@ exports.subBoardData = function(req, res){
         if(err){
             res.send(err);
         } else {
+            console.log("sub ? off ::::::::::" + off)
             res.send({
                 rows3 : result,
                 length : result.length - 1,

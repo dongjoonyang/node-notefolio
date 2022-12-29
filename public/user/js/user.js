@@ -72,7 +72,7 @@ function fnMainCategory(mainId, off){
         .done(function(json){
             fnNoteCate(json);
             fnNoteList(json); // 리스트 목록
-            fnInfinityScroll(json); // 스크롤 시 데이터 호출
+            fnMainInfinityScroll(json); // 스크롤 시 데이터 호출
         })
         .fail(function(xhr, status, errorThrown){
             console.log("게시판 및 카테고리 Ajax failed")
@@ -138,51 +138,77 @@ function fnNoteList(json){
 
 /**
 * =======================================
-* 설  명 : 바닥 감지 이벤트
+* 설  명 : 바닥 감지 이벤트(All 카테고리)
 * =======================================
 */
-function fnInfinityScroll(json) {
-    let flag = true;
+function fnMainInfinityScroll(json) {
+    let isScroll = true;
+    console.log("main infinity scroll :" + json.off);
+
+    $(document).on("scroll", function(){
+        let mainId = $("#subCategory .active").data("mainId");
+        let subId = $("#subCategory .active").data("subId");        
+
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
+            if(isScroll) {
+                if(subId == undefined) {
+                    if(json.length !== -1) {
+                        off = json.off + 5;
+                        $.ajax({
+                            type : "get",
+                            url : "/main/" + mainId + "/off/" + off,
+                            dataType : "JSON",
+                        })
+                        .done(function(json){
+                            fnNoteList(json);
+                            fnMainInfinityScroll(json);    
+                        })
+                        .fail(function(request, status, error){
+                            console.log("페이징 불러오기 Ajax failed");
+                        });
+                    }
+                }
+            } 
+            isScroll = false;
+        }
+    });
+}
+
+/**
+* =======================================
+* 설  명 : 바닥 감지 이벤트(Sub 카테고리)
+* =======================================
+*/
+function fnSubInfinityScroll(json) {
+    let isScroll = true;
+    console.log("sub infinity scroll :" + json.off);
+
     $(document).on("scroll", function(){
         let mainId = $("#subCategory .active").data("mainId");
         let subId = $("#subCategory .active").data("subId");
-        
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
-            console.log("ok");
-            console.log("json.off :" + json.off);
 
-            if(flag == true){
-                if(subId == undefined){
-                    let off = json.off + 5;
-                    $.ajax({
-                        type : "get",
-                        url : "/main/" + mainId + "/off/" + off,
-                        dataType : "JSON",
-                    })
-                    .done(function(json){
-                        fnNoteList(json);
-                        fnInfinityScroll(json); // 스크롤 시 데이터 호출            
-                    })
-                    .fail(function(request, status, error){
-                        console.log("페이징 불러오기 Ajax failed");
-                    });
-                }else{
-                    let off = json.off + 5;
-                    $.ajax({
-                        type : "get",
-                        url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
-                        dataType : "JSON"
-                    })
-                    .done(function(json){
-                        fnNoteList(json);
-                        fnInfinityScroll(json); // 스크롤 시 데이터 호출
-                    })
-                    .fail(function(xhr, status, errorThrown){
-                        console.log("서브 게시판 및 카테고리 Ajax failed")
-                    });
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
+            if(isScroll) {
+                if(subId != undefined) {
+                    if(json.length !== -1) {
+                        off = json.off + 5;
+                        console.log("스크롤 탄 off :" + off);
+                        $.ajax({
+                            type : "get",
+                            url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
+                            dataType : "JSON"
+                        })
+                        .done(function(json){
+                            fnNoteList(json);
+                            fnSubInfinityScroll(json); // 스크롤 시 데이터 호출
+                        })
+                        .fail(function(xhr, status, errorThrown){
+                            console.log("서브 게시판 및 카테고리 Ajax failed")
+                        });   
+                    }
                 }
             }
-            flag = false;
+            isScroll = false;
         }
     });
 }
@@ -198,12 +224,11 @@ $(function() {
     * =======================================
     */
     $(document).on("click", "#subCategory li a", function(){
+        alert("subcategory click");
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
         let selfAcive = $(this).hasClass("active");
-        let off = 0;
-        console.log("off :" + off);
-        
+
         // 서브 카테고리
         if(!selfAcive){
             $("#subCategory li a").removeClass("active");
@@ -222,13 +247,15 @@ $(function() {
             })
             .done(function(json){
                 fnNoteList(json);
-                fnInfinityScroll(json); // 스크롤 시 데이터 호출
+                console.log("main json.off ::::: " + json.off)
+                fnMainInfinityScroll(json); // 스크롤 시 데이터 호출
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("메인 게시판 및 카테고리 Ajax failed")
             });
         }else{
             let off = 0; // offset 초기화
+            // off 초기화 이상무
             $.ajax({
                 type : "get",
                 url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
@@ -236,7 +263,8 @@ $(function() {
             })
             .done(function(json){
                 fnNoteList(json);
-                fnInfinityScroll(json);
+                console.log("sub json.off ::::: " + json.off)
+                fnSubInfinityScroll(json);
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("서브 게시판 및 카테고리 Ajax failed")

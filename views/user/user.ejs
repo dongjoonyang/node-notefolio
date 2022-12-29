@@ -5,21 +5,25 @@
     <script src="/user/js/user.js"></script>
 </head>
 <body>
+    <!-- 메인 카테고리 -->
     <%-include('./nav.ejs') %>
     <section id="wrap" class="wrap">
+        <!--프로필 -->
         <div id="profile" class="profile"></div>
+        
         <div id="note" class="note">
+            <!-- 카테고리 -->
             <ul id='subCategory' class='sub-category'></ul>
+            <!-- 리스트 -->
             <div id="noteList" class='note-list'></div>
         </div>
-
+        <!-- 팝업 -->
         <div id="pop" class="layer-n">
             <div class="bg"></div>
             <div class="layer-box">
                 <div class="pop-area"></div>
             </div>
         </div>
-
     </section>
 </body>
 </html>
