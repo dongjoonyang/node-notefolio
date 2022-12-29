@@ -181,38 +181,48 @@ function fnMainInfinityScroll(json) {
 */
 function fnSubInfinityScroll(json) {
     
-    let isScroll = true;
-    console.log("sub infinity scroll :" + json.off);
 
-    $(document).on("scroll", function(event){
-        let mainId = $("#subCategory .active").data("mainId");
-        let subId = $("#subCategory .active").data("subId");
 
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
-            if(isScroll) {
-                if(subId != undefined) {
-                    if(json.length !== -1) {
-                        off = json.off + 5;
-                        console.log("스크롤 탄 off :" + off);
-                        console.log("isScroll : " + isScroll);
-                        $.ajax({
-                            type : "get",
-                            url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
-                            dataType : "JSON"
-                        })
-                        .done(function(json){
-                            fnNoteList(json);
-                            fnSubInfinityScroll(json)
-                        })
-                        .fail(function(xhr, status, errorThrown){
-                            console.log("서브 게시판 및 카테고리 Ajax failed")
-                        });   
-                    }
-                }
-            }
-            isScroll = false;
-        }
-    });
+
+
+
+
+
+
+    // let isScroll = true;
+
+    // $(document).on("scroll", function(event){
+    //     let mainId = $("#subCategory .active").data("mainId");
+    //     let subId = $("#subCategory .active").data("subId");
+
+    //     if($(window).scrollTop() + $(window).height() == $(document).height()) {    
+    //         if(isScroll) {
+    //             if(subId != undefined) {
+    //                 if(json.length !== -1) {
+    //                     off = json.off + 5;
+    //                     console.log("off size :" + off);
+    //                     $.ajax({
+    //                         type : "get",
+    //                         url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
+    //                         dataType : "JSON"
+    //                     })
+    //                     .done(function(json){
+                            
+    //                         fnNoteList(json);
+    //                         fnSubInfinityScroll(json);
+    //                     })
+    //                     .fail(function(xhr, status, errorThrown){
+    //                         console.log("서브 게시판 및 카테고리 Ajax failed")
+    //                     });   
+    //                 }else {
+    //                     return false;
+    //                 }
+    //             }
+    //         }
+    //         console.log("통과");
+    //         isScroll = false;
+    //     }
+    // });
 }
 
 
@@ -226,7 +236,6 @@ $(function() {
     * =======================================
     */
     $(document).on("click", "#subCategory li a", function(){
-        alert("subcategory click");
         let mainId = $(this).data("mainId");
         let subId = $(this).data("subId");
         let selfAcive = $(this).hasClass("active");
@@ -264,8 +273,7 @@ $(function() {
             })
             .done(function(json){
                 fnNoteList(json);
-                console.log("sub json.off ::::: " + json.off)
-                fnSubInfinityScroll(json)                                
+                fnSubInfinityScroll(json)
             })
             .fail(function(xhr, status, errorThrown){
                 console.log("서브 게시판 및 카테고리 Ajax failed")
