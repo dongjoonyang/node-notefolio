@@ -159,7 +159,7 @@ function fnMainInfinityScroll(json) {
                 dataType : "JSON",
             })
             .done(function(json){
-                lastCardObserver.unobserve(lastCard.target)
+                lastCardObserver.unobserve(lastCard.target);
                 fnNoteList(json);
                 fnMainInfinityScroll(json)
             })

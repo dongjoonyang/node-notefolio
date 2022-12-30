@@ -1,7 +1,9 @@
 /* 공통 */
 .display-none{display: none;}
+
 /* 초기화 */
 a{text-decoration: none;}
+
 /* 네비게이션 */
 .navi{position: relative;height: 50px;line-height: 50px;border-bottom: 1px solid #ddd;}
 .navi a{color: #333; font-weight: bold; font-size: 16px;}
@@ -12,6 +14,7 @@ a{text-decoration: none;}
 /* 프로필 */
 .profile{padding: 82px 3% 0 3%;}
 .profile img{width: 100%;}
+
 /* 메인 카테고리 */
 #mainCategory li a{color: #333; font-weight: bold;font-size: 16px;padding: 10px;border-radius: 30px;}
 #mainCategory li a:hover{background-color: #ddd;}
@@ -33,11 +36,29 @@ a{text-decoration: none;}
 .note-list .note-item .note-img{width: 350px; height: 350px; overflow: hidden;border-radius: 5px; background-color: #eee;}
 .note-list .note-item .note-img img{width: 100%;border-radius: 5px;}
 .note-list .note-item .note-info{padding: 10px 20px;height: 40px; line-height: 40px;}
+
 /* 페이지 */
 .note-page{width: 100%;margin-top: 20px;}
 .note-page ul{display: flex;justify-content: center;}
 .note-page ul li a{display: flex;align-items: center;justify-content: center;width: 24px;height: 24px;line-height: 25px;color: #212121;border-radius: 3px;}
 .note-page ul li.active a{background-color: #333;color: #fff;}
+
+/* 로더 */
+.scroll-observer{height: 200px;display: flex;justify-content: center;align-items: center;}
+.lds-ring{display: inline-block;position: relative;width: 64px;height: 64px;}
+.lds-ring div{box-sizing: border-box;display: block;position: absolute;width: 51px;height: 51px;margin: 6px;border: 6px solid #fff;border-radius: 50%;animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;border-color: #F86C06 transparent transparent transparent;}
+.lds-ring div:nth-child(1){animation-delay: -0.45s;}
+.lds-ring div:nth-child(2){animation-delay: -0.3s;}
+.lds-ring div:nth-child(3){animation-delay: -0.15s;}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
 
 /*** ========================================================================== 
  * 팝업
