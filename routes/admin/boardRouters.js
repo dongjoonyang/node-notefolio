@@ -2,8 +2,20 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer'); // multer
 const BoardController = require('../../controllers/admin/boardController');
+const fs = require('fs'); // file 생성시 필요
 
- 
+/**
+* =======================================
+* 설  명 : uploads 폴더 생성
+* =======================================
+*/ 
+// 폴더 없을시 생성
+let dir = './public/uploads';
+if (!fs.existsSync(dir)){
+  fs.mkdirSync(dir);
+  console.log(dir);
+}
+
 /**
 * =======================================
 * 설  명 : multer 파일 생성 연결
@@ -11,7 +23,7 @@ const BoardController = require('../../controllers/admin/boardController');
 */
 const storage = multer.diskStorage({
   destination:  (req, file, cb) => {
-    cb(null, './public/uploads') // 경로 이렇게 하니까 됨..
+    cb(null, './public/uploads') // 경로 설정
   },
   filename:  (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname)// 파일 원본이름 저장
