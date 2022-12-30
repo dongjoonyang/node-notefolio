@@ -143,6 +143,9 @@ function fnNoteList(json){
 */
 function fnMainInfinityScroll(json) {
     let mainId = $("#subCategory .active").data("mainId");
+
+    $("#scroll-observer").show();
+
     console.log("main infinity scroll :" + json.off);
 
     const lastCardObserver = new IntersectionObserver(entries => {
@@ -166,8 +169,11 @@ function fnMainInfinityScroll(json) {
             .fail(function(request, status, error){
                 console.log("페이징 불러오기 Ajax failed");
             });
+        } else {
+            $("#scroll-observer").hide();
         }
-        lastCardObserver.observe(document.querySelector('.note-item:last-child'))
+        lastCardObserver.observe(document.querySelector('.note-item:last-child'));
+        
     },{})
 
     lastCardObserver.observe(document.querySelector('.note-item:last-child'))
@@ -181,6 +187,8 @@ function fnMainInfinityScroll(json) {
 function fnSubInfinityScroll(json) {
     let mainId = $("#subCategory .active").data("mainId");
     let subId = $("#subCategory .active").data("subId");
+
+    $("#scroll-observer").show();
 
     console.log("sub infinity scroll :" + json.off);
 
@@ -205,6 +213,8 @@ function fnSubInfinityScroll(json) {
             .fail(function(xhr, status, errorThrown){
                 console.log("서브 게시판 및 카테고리 Ajax failed")
             });   
+        } else {
+            $("#scroll-observer").hide();
         }
         lastCardObserver.observe(document.querySelector('.note-item:last-child'))
     },{})
