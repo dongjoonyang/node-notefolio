@@ -142,36 +142,35 @@ function fnNoteList(json){
 * =======================================
 */
 function fnMainInfinityScroll(json) {
-    let isScroll = true;
+    let mainId = $("#subCategory .active").data("mainId");
     console.log("main infinity scroll :" + json.off);
 
-    $(document).on("scroll", function(){
-        let mainId = $("#subCategory .active").data("mainId");
-        let subId = $("#subCategory .active").data("subId");        
+    const lastCardObserver = new IntersectionObserver(entries => {
+        const lastCard = entries[0];
 
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {    
-            if(isScroll) {
-                if(subId == undefined) {
-                    if(json.length !== -1) {
-                        off = json.off + 5;
-                        $.ajax({
-                            type : "get",
-                            url : "/main/" + mainId + "/off/" + off,
-                            dataType : "JSON",
-                        })
-                        .done(function(json){
-                            fnNoteList(json);
-                            fnMainInfinityScroll(json)
-                        })
-                        .fail(function(request, status, error){
-                            console.log("페이징 불러오기 Ajax failed");
-                        });
-                    }
-                }
-            } 
-            isScroll = false;
+        if(!lastCard.isIntersecting) return;
+
+        // 데이터 불러오기
+        if(json.length !== -1) {
+            off = json.off + 5;
+            $.ajax({
+                type : "get",
+                url : "/main/" + mainId + "/off/" + off,
+                dataType : "JSON",
+            })
+            .done(function(json){
+                lastCardObserver.unobserve(lastCard.target)
+                fnNoteList(json);
+                fnMainInfinityScroll(json)
+            })
+            .fail(function(request, status, error){
+                console.log("페이징 불러오기 Ajax failed");
+            });
         }
-    });
+        lastCardObserver.observe(document.querySelector('.note-item:last-child'))
+    },{})
+
+    lastCardObserver.observe(document.querySelector('.note-item:last-child'))
 }
 
 /**
@@ -180,49 +179,37 @@ function fnMainInfinityScroll(json) {
 * =======================================
 */
 function fnSubInfinityScroll(json) {
-    
+    let mainId = $("#subCategory .active").data("mainId");
+    let subId = $("#subCategory .active").data("subId");
 
+    console.log("sub infinity scroll :" + json.off);
 
+    const lastCardObserver = new IntersectionObserver(entries => {
+        const lastCard = entries[0];
 
+        if(!lastCard.isIntersecting) return;
 
+        // 데이터 불러오기
+        if(json.length !== -1) {
+            off = json.off + 5;
+            $.ajax({
+                type : "get",
+                url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
+                dataType : "JSON"
+            })
+            .done(function(json){
+                lastCardObserver.unobserve(lastCard.target)
+                fnNoteList(json);
+                fnSubInfinityScroll(json); // 스크롤 시 데이터 호출
+            })
+            .fail(function(xhr, status, errorThrown){
+                console.log("서브 게시판 및 카테고리 Ajax failed")
+            });   
+        }
+        lastCardObserver.observe(document.querySelector('.note-item:last-child'))
+    },{})
 
-
-
-
-    // let isScroll = true;
-
-    // $(document).on("scroll", function(event){
-    //     let mainId = $("#subCategory .active").data("mainId");
-    //     let subId = $("#subCategory .active").data("subId");
-
-    //     if($(window).scrollTop() + $(window).height() == $(document).height()) {    
-    //         if(isScroll) {
-    //             if(subId != undefined) {
-    //                 if(json.length !== -1) {
-    //                     off = json.off + 5;
-    //                     console.log("off size :" + off);
-    //                     $.ajax({
-    //                         type : "get",
-    //                         url : "/main/" + mainId + "/sub/" + subId + "/off/" + off,
-    //                         dataType : "JSON"
-    //                     })
-    //                     .done(function(json){
-                            
-    //                         fnNoteList(json);
-    //                         fnSubInfinityScroll(json);
-    //                     })
-    //                     .fail(function(xhr, status, errorThrown){
-    //                         console.log("서브 게시판 및 카테고리 Ajax failed")
-    //                     });   
-    //                 }else {
-    //                     return false;
-    //                 }
-    //             }
-    //         }
-    //         console.log("통과");
-    //         isScroll = false;
-    //     }
-    // });
+    lastCardObserver.observe(document.querySelector('.note-item:last-child'))
 }
 
 
