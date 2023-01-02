@@ -1,3 +1,7 @@
+/* 전역 상수 */
+// const AJAX_MULTIPART_ENC_TYPE = "multipart/form-data",
+// 	  AJAX_SUCCESS_CODE = "success",
+
 /**
  * =======================================
  * 범 주 : 초기 세팅 함수
@@ -30,7 +34,7 @@ function fnNavInit() {
 /**
  * =======================================
  * 범 주 : 
- * 설  명 : 텍스트 빈칸 삭제
+ * 설  명 :
  * =======================================
  */
 function fnGetInputTxtTrimForm(formVar) {
@@ -41,11 +45,18 @@ function fnGetInputTxtTrimForm(formVar) {
 	return formVar;
 }
 
+/*
+ * =======================================
+ * 踰� 二� : 怨듯넻 - jQuery
+ * ��  紐� : Form Serialize Object(JSON)�뺥깭 蹂��� �⑥닔
+ * �묒꽦��/�묒꽦�� : 源��먮�/2021.01.19
+ * =======================================
+ */
 
 /**
  * =======================================
  * 범 주 : 
- * 설  명 : Form Serialize Object(JSON)
+ * 설  명 :
  * =======================================
  */
 

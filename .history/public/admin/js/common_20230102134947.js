@@ -26,26 +26,10 @@ function fnNavInit() {
     });
 }
 
-
 /**
  * =======================================
- * 범 주 : 
- * 설  명 : 텍스트 빈칸 삭제
- * =======================================
- */
-function fnGetInputTxtTrimForm(formVar) {
-	$(formVar).find("input:text").each(function() {
-        $(this).val($.trim($(this).val()));
-	});
-
-	return formVar;
-}
-
-
-/**
- * =======================================
- * 범 주 : 
- * 설  명 : Form Serialize Object(JSON)
+ * 범 주 : Form Serialize Object(JSON)
+ * 설  명 : json 객체 셋팅
  * =======================================
  */
 

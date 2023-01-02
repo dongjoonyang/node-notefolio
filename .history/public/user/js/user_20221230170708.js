@@ -146,6 +146,8 @@ function fnMainInfinityScroll(json) {
 
     $("#scroll-observer").show();
 
+    console.log("main infinity scroll :" + json.off);
+
     const lastCardObserver = new IntersectionObserver(entries => {
         const lastCard = entries[0];
 
@@ -187,6 +189,8 @@ function fnSubInfinityScroll(json) {
     let subId = $("#subCategory .active").data("subId");
 
     $("#scroll-observer").show();
+
+    console.log("sub infinity scroll :" + json.off);
 
     const lastCardObserver = new IntersectionObserver(entries => {
         const lastCard = entries[0];
@@ -251,6 +255,7 @@ $(function() {
             })
             .done(function(json){
                 fnNoteList(json);
+                console.log("main json.off ::::: " + json.off)
                 fnMainInfinityScroll(json); // 스크롤 시 데이터 호출
             })
             .fail(function(xhr, status, errorThrown){

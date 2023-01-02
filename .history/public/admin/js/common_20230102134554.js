@@ -1,3 +1,7 @@
+/* 전역 상수 */
+// const AJAX_MULTIPART_ENC_TYPE = "multipart/form-data",
+// 	  AJAX_SUCCESS_CODE = "success",
+
 /**
  * =======================================
  * 범 주 : 초기 세팅 함수
@@ -30,7 +34,7 @@ function fnNavInit() {
 /**
  * =======================================
  * 범 주 : 
- * 설  명 : 텍스트 빈칸 삭제
+ * 설  명 :
  * =======================================
  */
 function fnGetInputTxtTrimForm(formVar) {
@@ -41,14 +45,13 @@ function fnGetInputTxtTrimForm(formVar) {
 	return formVar;
 }
 
-
-/**
+/*
  * =======================================
- * 범 주 : 
- * 설  명 : Form Serialize Object(JSON)
+ * 踰� 二� : 怨듯넻 - jQuery
+ * ��  紐� : Form Serialize Object(JSON)�뺥깭 蹂��� �⑥닔
+ * �묒꽦��/�묒꽦�� : 源��먮�/2021.01.19
  * =======================================
  */
-
 $.fn.serializeObject = function() {
     let o = {};
     let a = this.serializeArray();
@@ -67,7 +70,8 @@ $.fn.serializeObject = function() {
 
 
 $(function($){
-    /* 초기 세팅 함수 실행 */    
+    /* 초기 세팅 함수 실행 */
+    //fnLayerOpenInit(); // 공통 팝업 오픈 이벤트 함수
     fnValidateInit(); // 유효성 검사
     fnNavInit(); // 
 
@@ -117,4 +121,5 @@ $(function($){
         $("nav").removeClass("menu");
         $(".toolbar__menu--btn").removeClass("respon");
     })
+
 });

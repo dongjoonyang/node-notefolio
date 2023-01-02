@@ -30,7 +30,7 @@ function fnNavInit() {
 /**
  * =======================================
  * 범 주 : 
- * 설  명 : 텍스트 빈칸 삭제
+ * 설  명 :
  * =======================================
  */
 function fnGetInputTxtTrimForm(formVar) {
@@ -44,8 +44,8 @@ function fnGetInputTxtTrimForm(formVar) {
 
 /**
  * =======================================
- * 범 주 : 
- * 설  명 : Form Serialize Object(JSON)
+ * 범 주 : Form Serialize Object(JSON)
+ * 설  명 : json 객체 셋팅
  * =======================================
  */
 
