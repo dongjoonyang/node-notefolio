@@ -8,7 +8,7 @@ function fnProfileInitList(){
 
     let profile = '';
     profile += "<h1>양반김 프로필 :::::: 프로필 화면입니다.</h1>";
-    profile += "<img src='/images/bg.jpg'>";
+    // profile += "<img src='/images/bg.jpg'>";
     $("#profile").append(profile);
 }
 /**
