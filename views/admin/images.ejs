@@ -20,17 +20,19 @@
                 <div class="images">
                     <div class="card images__area">
                         <h1>업로드 이미지</h1>
-                        <% 
-                            for(let i = 0; i < imgFile.length; i++) {
-                                let data = imgFile[i]; 
-                        %>
-                        <ul>
-                            <li>
-                                <input type="checkbox" name="color" value="blue">
-                                <img src="/uploads/<%= data %>">
+                        <ul class="images__list">
+                            <% 
+                                for(let i = 0; i < imgFile.length; i++) {
+                                    let data = imgFile[i]; 
+                            %>
+                            <li class="images__list--item">
+                                <label>
+                                    <input type="checkbox" name="color" value="blue">
+                                    <img src="/uploads/<%= data %>">
+                                </label>
                             </li>
+                            <% } %>
                         </ul>
-                        <% } %>
                     </div>
                 </div>
             </div>

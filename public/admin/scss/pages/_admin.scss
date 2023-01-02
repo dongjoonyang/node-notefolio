@@ -453,11 +453,30 @@ main{
         .images {
             width: 100%;
             .images__area {
+                padding: 20px;
                 h1 {
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                     font: {
                         size: 14px;
                         weight: bold;
+                    }
+                }
+            }
+            .images__list {
+                display: flex;
+                flex-wrap: wrap;
+                .images__list--item {
+                    margin: 15px;
+                    label {
+                        display: flex;
+                        align-items: flex-start;
+                        input {
+                            margin-right: 15px;
+                        }
+                        img {
+                            width: 60px;
+                            height: 60px;
+                        }
                     }
                 }
             }
