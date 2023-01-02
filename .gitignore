@@ -1,4 +1,5 @@
-\public\admin\scss\.sass-cache
+\.sass-cache
 \node_modules
-\public\uploads
+\uploads
 \.history
+\test
