@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('head.ejs') %>
+    <!-- <script src="/admin/js/memberEdit.js"></script> -->
+</head>
+<body>
+    <div class="wrap">
+        <%-include('nav.ejs') %>
+        
+        <header>
+            <div class="toolbar">
+                <%-include('menu.ejs') %>
+                <%-include('logout.ejs') %>
+            </div>
+        </header>
+        <% 
+        for(let i = 0; i < imgFile.length; i++) {
+            let data = rows[i]; 
+        %>
+        <main>
+            <div class="content">
+                <div class="images">
+                    <div class="card images__area">
+                        <h1>업로드 이미지</h1>
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="color" value="blue">
+                                <img src="">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <% } %>
+    </div>
+</body>
+</html>

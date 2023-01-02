@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('head.ejs') %>
+    <script src="/admin/js/manage.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <%-include('nav.ejs') %>
+
+        <header>
+            <div class="toolbar">
+                <%-include('menu.ejs') %>
+                <%-include('logout.ejs') %>
+            </div>
+        </header>
+
+        <main>
+            <div class="content">
+                <div class="mng">
+                    <div class="mng__setting">
+                        <div class="card">
+                            <div class="mng__title">
+                                <span>카테고리 관리</span>
+                                <a href="javascript:;" id="categoryBtn" class="mng__title--btn">
+                                    <span>
+                                        <i class="fas fa-cog"></i>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <!-- category(project) -->
+                            <div class="mng-category">
+                            <% 
+                                for(let i = 0; i < rows1.length; i++) {
+                                    let data = rows1[i]; 
+                            %>
+                                <div class="mng-category__all">
+                                    <a href="javascript:;" data-main-id="<%= data.main_id %>" class="<%= data.main_id == 1 ? 'active' : ''%>"><%= data.main_title %></a>
+                                </div>
+                                <ul class="mng-category__list">
+                                <%  
+                                    if(data.main_id === 1){
+                                    for(let j = 0; j < rows2.length; j++) {
+                                        let data2 = rows2[j];
+                                        if(data2.main_id === 1){
+                                %>
+                                            <li>
+                                                <a href="javascript:;" id="pr<%= data2.sub_id %>" data-main-id="<%= data2.main_id %>" data-sub-id="<%= data2.sub_id %>"><%= data2.sub_title %></a>
+                                            </li>
+                                        <% } %>
+                                    <% } %>
+                                </ul>
+                                <% } else { 
+                                    for(let k = 0; k < rows2.length; k++) {
+                                        let data3 = rows2[k];
+                                        if(data3.main_id === 2){
+                                %>
+                                            <li>
+                                                <a href="javascript:;" id="ar<%= data3.sub_id %>" data-main-id="<%= data3.main_id %>" data-sub-id="<%= data3.sub_id %>"><%= data3.sub_title %></a>
+                                            </li>
+                                        <% } %>
+                                    <% } %>
+                                </ul>
+                                <% } %>
+                            <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- right -->
+                    <div class="mng__data">
+                        <!-- top option -->
+                        <div class="mng__option">
+                            <!-- Search hide -->
+                            <!-- <form action="" method="get">
+                                <fieldset>
+                                    <legend class="visually-hidden">검색</legend>
+                                    <div class="mng__search">
+                                        <input type="text" placeholder="Search" class="mng-search--input">
+                                        <button type="submit" class="btn btn-simple">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form> -->
+                            <!-- number index reset -->
+                            <div class="mng__number">
+                                <button type="button" id="boardNumResetBtn" class="btn btn-simple"><i class="fas fa-registered"></i></button>                                     
+                            </div>
+
+                            <div class="mng__btn">
+                                <a href="javascript:;" id="boardAddBtn" class="btn btn-simple display-none"><i class="fas fa-plus"></i></a>
+                                <button type="button" form="boardForm" id="boardDelBtn" class="btn btn-simple display-none" data-main-id="1"><i class="fas fa-trash"></i></button>                                     
+                            </div>
+                        </div>
+
+                        <form action="" method="get" id="boardForm" >
+                            <div class="mng__table">
+                                <div class="mng__empty display-none">등록된 프로젝트가 없습니다.</div>
+                                <div class="card">
+                                    <table class="mng__table--box">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="item-box-chk"><input type="checkbox" id="boardAllChk"></th>
+                                                <th scope="col">순번</th>
+                                                <th scope="col">이미지</th>
+                                                <th scope="col">제목</th>
+                                                <th scope="col">작성일</th>
+                                                <th scope="col">수정일</th>
+                                                <th scope="col">메인</th>
+                                                <th scope="col">서브</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% 
+                                                for(var i = (page * page_num) - page_num; i < (page * page_num); i++) {
+                                                    if(i > length){
+                                                        i++;
+                                                    }else{
+                                                        let data = rows3[i];
+                                                        console.log(rows3[i])
+                                            %>
+                                            <tr class="mng__table--main">
+                                                <td class="mng__table--center item-box-chk"><input type="checkbox" name="boardChk[]" id="itemChk" value="<%= data.idx%>"></td>
+                                                <td class="mng__table--center"><%= data.idx %></td>
+                                                <td class="mng__table--center"><a href="/admin/board/boardRead/<%= data.idx %>/<%= data.main_id %>/<%= data.sub_id %>" id="modBoardBtn"><img src="<%= data.image %>" class="mng__table--thumb"></a></td>
+                                                <!-- <td class="mng__table--center"><a href="javascript:;" id="modBoardBtn" data-idx="<%= data.idx %>" data-main-id="<%= data.sub_id %>" data-sub-id="<%= data.sub_id %>"><img src="<%= data.image %>" class="mng__table--thumb"></a></td> -->
+                                                <td class="mng__table--center"><%= data.title %></td>
+                                                <td class="mng__table--center"><%= data.regdate %></td>
+                                                <td class="mng__table--center"><%= data.modidate %></td>
+                                                <td class="mng__table--center"><%= data.main_id == 1 ? 'project' : 'Artwork'  %></td>
+                                                <td class="mng__table--center"><%= data.sub_id %></td>
+                                            </tr>
+                                            <% }
+                                            } 
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mng__pagination">
+                                    <ul class="pagination">
+                                        <%
+                                            for(let j = 0; j < rows3.length / page_num; j++){
+                                        %>
+                                            <!-- <li class="<%= page == j + 1 ? 'active' : ''%>"><a href="/admin/manage/1/page/<%= j + 1 %>" ><%= j + 1 %></a></li> -->
+                                            <li class="<%= page == j + 1 ? 'active' : ''%>"><a href="javascript:;" data-main-id="<%= rows3[j].main_id %>" data-page="<%= j + 1 %>"><%= j + 1 %></a></li>
+                                        <%
+                                            }
+                                        %>
+                                    </ul>
+
+                                    <!-- <ul class="pagination">
+                                        <li class="prev disabled">
+                                            <a href="javascript:;"><i class="fas fa-chevron-left"></i></a>
+                                        </li>
+                                        <li class="active"><a href="javascript:;">1</a></li>
+                                        <li><a href="javascript:;">2</a></li>
+                                        <li><a href="javascript:;">3</a></li>
+                                        <li class="next disabled">
+                                            <a href="javascript:;"><i class="fas fa-chevron-right"></i></a>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Category Manager Pop Up -->
+        <form id="categoryForm" autocomplete="off">
+            <fieldset>
+                <div class="modal fade display-none"><!-- display-none -->
+                    <div class="modal__dialog modal__dialog--centered">
+                        <div class="modal__content modal__category">
+                            <div class="modal__header">
+                                <h2 class="modal__title">New Category</h2>
+                                <div class="modal__btn">
+                                    <button type="button" id="cancelBtn" class="btn btn-cancel">Cancel</button>
+                                    <button type="submit" id="confirmBtn" class="btn btn-confirm">Confirm</button>
+                                </div>
+                            </div>
+                            <div class="modal__body">
+                                <div class="modal__tree">
+                                    <div class="modal__new--btn">
+                                        <button type="button" id="categoryNewBtn" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                                    </div>
+
+                                    <ul class="modal__tree--list"></ul>
+                                    <div class="modal__generate"></div>
+                                </div>
+                                <div class="modal__mod">
+                                    <input type="hidden" id="categorySubIdInput" name="categorySubId">
+
+                                    <label for="categoryNameInput">카테고리 이름</label>
+                                    <input type="text" id="categoryNameInput" name="categoryName" readonly>
+
+                                    <div class="modal__mod--kinds">
+                                        <input type="radio" id="categoryOwn" name="categoryKinds"  value="1" checked>
+                                        <label for="categoryOwn">Poroject</label>
+                                        <input type="radio" id="categoryTwo" name="categoryKinds"  value="2">
+                                        <label for="categoryTwo">Artwork</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!-- Category Manager Pop Up -->
+    </div>
+</body>
+</html>
