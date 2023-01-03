@@ -312,5 +312,4 @@ $(function() {
     $(".layer-n .bg, .layer-n .pop-close").on( "click", function(e) {
 		$(this).closest(".layer-n").fadeOut();
 	});
-    
 });

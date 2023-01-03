@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%-include('head.ejs') %>
-    <!-- <script src="/admin/js/memberEdit.js"></script> -->
+    <script src="/admin/js/images.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -20,26 +20,28 @@
                 <div class="images">
                     <div class="card images__area">
                         <h1>업로드 이미지</h1>
-                        
-                        <!-- 삭제 버튼 -->
-                        <div class="images__mng">
-                            <label><input type="checkbox">전체선택</label>
-                            <button class="images__del--btn">삭제</button>
-                        </div> 
+                        <form id="delForm" action="/admin/images/del" method="post">
+                            <!-- 삭제 버튼 -->
+                            <div class="images__mng">
+                                <label><input type="checkbox" name="allChk">전체선택</label>
+                                <button type="button" id="delBtn" class="images__del--btn">삭제</button>
+                            </div> 
 
-                        <ul class="images__list">
-                            <% 
-                                for(let i = 0; i < imgFile.length; i++) {
-                                    let data = imgFile[i]; 
-                            %>
-                            <li class="images__list--item">
-                                <label>
-                                    <input type="checkbox" name="color" value="blue">
-                                    <img src="/uploads/<%= data %>">
-                                </label>
-                            </li>
-                            <% } %>
-                        </ul>
+                            <ul class="images__list">
+                                <% 
+                                    for(let i = 0; i < imgFile.length; i++) {
+                                        let data = imgFile[i]; 
+                                %>
+                                <li class="images__list--item">
+                                    <label>
+                                        <input type="checkbox" name="image" value="<%= data %>">
+                                        <img src="/uploads/<%= data %>">
+                                    </label>
+                                    <span><%= data %></span>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>
