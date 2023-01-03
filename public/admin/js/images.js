@@ -36,7 +36,8 @@ $(function() {
      */
     $("#delBtn").on("click", function() {
         let parameter = $("#delForm").serializeObject();
-        
+        let listHtml = "";
+
         // 객체가 빈값이면 true
         if($.isEmptyObject(parameter)) return false;
 
@@ -51,11 +52,9 @@ $(function() {
             $(".images__list").empty();
 
             if(Array.isArray(result) && result.length === 0) { 
-                let listHtml = "";
                 listHtml += "<strong>데이터가 없습니다.</strong>"
                 $(".images__list").append(listHtml);
             } else {
-                let listHtml = "";
                 for(let i = 0; i < result.length; i++){
                     listHtml += "<li class='images__list--item'>";
                     listHtml += "<label>";

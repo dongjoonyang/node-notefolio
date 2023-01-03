@@ -21,7 +21,11 @@
                     <div class="card images__area">
                         <h1>업로드 이미지</h1>
                         <form id="delForm" action="/admin/images/del" method="post">
-                            <!-- 삭제 버튼 -->
+                            <% 
+                                if(imgFile.length == 0) {
+                            %>
+                                <strong>데이터가 없습니다.</strong>
+                            <% } else { %>
                             <div class="images__mng">
                                 <label><input type="checkbox" name="allChk">전체선택</label>
                                 <button type="button" id="delBtn" class="images__del--btn">삭제</button>
@@ -40,13 +44,9 @@
                                         <span><%= data %></span>
                                     </li>
                                 <% } %>
-                                
-                                <% 
-                                    if(imgFile.length == 0) {
-                                %>
-                                    <strong>데이터가 없습니다.</strong>
-                                <% } %>
                             </ul>
+
+                            <% } %>
                         </form>
                     </div>
                 </div>
