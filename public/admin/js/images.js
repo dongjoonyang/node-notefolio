@@ -58,10 +58,10 @@ $(function() {
                 for(let i = 0; i < result.length; i++){
                     listHtml += "<li class='images__list--item'>";
                     listHtml += "<label>";
-                    listHtml += "<input type='checkbox' name='image' value='" + result[i] + "'>";
-                    listHtml += "<img src='/uploads/" + result[i] + ">";
+                    listHtml += `<input type='checkbox' name='image' value='${result[i]}'>`;
+                    listHtml += `<img src='/uploads/${result[i]}'>`;
                     listHtml += "</label>";
-                    listHtml += "<span>" + result[i] + "</span>";
+                    listHtml += `<span>${result[i]}</span>`;
                     listHtml += "</li>";
                 }
                 $(".images__list").append(listHtml);
