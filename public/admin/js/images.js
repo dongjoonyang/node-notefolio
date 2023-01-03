@@ -47,9 +47,19 @@ $(function() {
             data : parameter
         })
         .done(function(result){
-            
+            console.log(result);
+            let listHtml = "";
+            $(".images__list--item").empty();
 
-            console.log("이미지 업로드 파일 삭제 성공");
+            if(Array.isArray(result) && result.length === 0) { 
+                listHtml += "<strong>값이 없습니다.</strong>"
+                $(".images__list").append(listHtml);
+            } else {
+            //    for(let i = 0; i < result.length; i++){
+
+            //    }
+            }
+
         })
         .fail(function(xhr, status, errorThrown){
             console.log("이미지 업로드 파일 삭제 Ajax failed");

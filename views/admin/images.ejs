@@ -30,15 +30,21 @@
                             <ul class="images__list">
                                 <% 
                                     for(let i = 0; i < imgFile.length; i++) {
-                                        let data = imgFile[i]; 
+                                    let data = imgFile[i]; 
                                 %>
-                                <li class="images__list--item">
-                                    <label>
-                                        <input type="checkbox" name="image" value="<%= data %>">
-                                        <img src="/uploads/<%= data %>">
-                                    </label>
-                                    <span><%= data %></span>
-                                </li>
+                                    <li class="images__list--item">
+                                        <label>
+                                            <input type="checkbox" name="image" value="<%= data %>">
+                                            <img src="/uploads/<%= data %>">
+                                        </label>
+                                        <span><%= data %></span>
+                                    </li>
+                                <% } %>
+                                
+                                <% 
+                                    if(imgFile.length == 0) {
+                                %>
+                                    <strong>데이터가 없습니다.</strong>
                                 <% } %>
                             </ul>
                         </form>

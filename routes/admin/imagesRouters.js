@@ -34,23 +34,28 @@ router.post('/del', function(req, res, next){
 
     if(!Array.isArray(imgName)){ // 배열이 아니면
         fs.unlink(`./public/uploads/${imgName}`, err => {
-            if (err) throw err;           
+            if (err) throw err;
+            fnFileLoadHandler();
         });
     } else {
         for(let i = 0; i < imgName.length; i++) {
             fs.unlink(`./public/uploads/${imgName[i]}`, err => {
-            if (err) throw err;
-           });
+                if (err) throw err;
+                fnFileLoadHandler();
+            });
         }
     }
 
-    let file = new Array();
-    fs.readdir("./public/uploads", (err, files) => {
-        if (err) {
-            throw err;
-        }
-        file = files;
-        res.json(file); 
-    });
+    // 파일 가져오기
+    function fnFileLoadHandler() {
+        let file = new Array();
+        fs.readdir("./public/uploads", (err, files) => {
+            if (err) {
+                throw err;
+            }
+            file = files;
+            res.json(file); 
+        });
+    }
 });
 module.exports = router;
