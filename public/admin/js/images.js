@@ -48,18 +48,25 @@ $(function() {
         })
         .done(function(result){
             console.log(result);
-            let listHtml = "";
-            $(".images__list--item").empty();
+            $(".images__list").empty();
 
             if(Array.isArray(result) && result.length === 0) { 
-                listHtml += "<strong>값이 없습니다.</strong>"
+                let listHtml = "";
+                listHtml += "<strong>데이터가 없습니다.</strong>"
                 $(".images__list").append(listHtml);
             } else {
-            //    for(let i = 0; i < result.length; i++){
-
-            //    }
+                let listHtml = "";
+                for(let i = 0; i < result.length; i++){
+                    listHtml += "<li class='images__list--item'>";
+                    listHtml += "<label>";
+                    listHtml += "<input type='checkbox' name='image' value='" + result[i] + "'>";
+                    listHtml += "<img src='/uploads/" + result[i] + ">";
+                    listHtml += "</label>";
+                    listHtml += "<span>" + result[i] + "</span>";
+                    listHtml += "</li>";
+                }
+                $(".images__list").append(listHtml);
             }
-
         })
         .fail(function(xhr, status, errorThrown){
             console.log("이미지 업로드 파일 삭제 Ajax failed");

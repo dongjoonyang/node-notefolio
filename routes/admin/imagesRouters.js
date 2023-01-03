@@ -17,6 +17,7 @@ router.get('/', function(req, res, next){
         if (err) {
             throw err;
         }
+        
         file = files;
         res.render('admin/images',{
             imgFile : file
