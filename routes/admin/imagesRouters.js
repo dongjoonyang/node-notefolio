@@ -1,7 +1,6 @@
 const express = require('express'); 
 const router = express.Router();
 const fs = require('fs'); // file 생성시 필요
-const { json } = require('sequelize');
 
 /**
 * =======================================
@@ -17,9 +16,9 @@ router.get('/', function(req, res, next){
         if (err) {
             throw err;
         }
-        
+
         file = files;
-        res.render('admin/images',{
+        return res.render('admin/images',{
             imgFile : file
         });
     });
@@ -36,27 +35,28 @@ router.post('/del', function(req, res, next){
     if(!Array.isArray(imgName)){ // 배열이 아니면
         fs.unlink(`./public/uploads/${imgName}`, err => {
             if (err) throw err;
-            fnFileLoadHandler();
+            //fnFileLoadHandler();
         });
     } else {
         for(let i = 0; i < imgName.length; i++) {
             fs.unlink(`./public/uploads/${imgName[i]}`, err => {
                 if (err) throw err;
-                fnFileLoadHandler();
+                //fnFileLoadHandler();
             });
         }
     }
 
     // 파일 가져오기
-    function fnFileLoadHandler() {
-        let file = new Array();
-        fs.readdir("./public/uploads", (err, files) => {
-            if (err) {
-                throw err;
-            }
-            file = files;
-            res.json(file); 
-        });
-    }
+    // function fnFileLoadHandler() {
+    //     let file = new Array();
+
+    //     fs.readdir("./public/uploads", (err, files) => {
+    //         if (err) {
+    //             throw err;
+    //         }
+    //         file = files;
+    //         return res.json(file); 
+    //     });
+    // }
 });
 module.exports = router;
