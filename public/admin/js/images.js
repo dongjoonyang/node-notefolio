@@ -1,11 +1,11 @@
-$(function() {
-    /**
-     * =======================================
-     * 설  명 : 체크 박스 전체 선택
-     * =======================================
-     */
-    const imageChk = $("input:checkbox[name='image']");
-    const imageAllChk = $("input:checkbox[name='allChk']");
+/**
+ * =======================================
+ * 설  명 : 전체 선택/해제
+ * =======================================
+ */
+function fnAllChkHandler() {
+    let imageChk = $("input:checkbox[name='image']");
+    let imageAllChk = $("input:checkbox[name='allChk']");
 
     imageAllChk.on("change", function() {
         let allChk = $(this).is(":checked");
@@ -28,6 +28,11 @@ $(function() {
             imageAllChk.prop("checked", false);
         }
     })
+}
+
+
+$(function() {
+    fnAllChkHandler() // all check
 
     /**
      * =======================================
@@ -48,12 +53,12 @@ $(function() {
             data : parameter
         })
         .done(function(result){
-            console.log(result);
             $(".images__list").empty();
 
             if(Array.isArray(result) && result.length === 0) { 
                 listHtml += "<strong>데이터가 없습니다.</strong>"
                 $(".images__list").append(listHtml);
+                fnAllChkHandler(); 
             } else {
                 for(let i = 0; i < result.length; i++){
                     listHtml += "<li class='images__list--item'>";
@@ -65,6 +70,7 @@ $(function() {
                     listHtml += "</li>";
                 }
                 $(".images__list").append(listHtml);
+                fnAllChkHandler(); 
             }
         })
         .fail(function(xhr, status, errorThrown){

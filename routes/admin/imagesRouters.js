@@ -42,13 +42,11 @@ router.post('/del', function(req, res, next){
         for(let i = 0; i < imgName.length; i++) {
             fs.unlink(`./public/uploads/${imgName[i]}`, err => {
                 if (err) throw err;
-                if(i == (imgName.length - 1)) {
+                if(i == (imgName.length - 1)) { // response 두번 발생 안하게 방지
                     fnFileLoadHandler(res);
                 }
             });
         }
-
-        
     }
 });
 
