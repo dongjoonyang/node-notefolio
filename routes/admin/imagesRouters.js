@@ -18,7 +18,7 @@ router.get('/', function(req, res, next){
         }
 
         file = files;
-        return res.render('admin/images',{
+        res.render('admin/images',{
             imgFile : file
         });
     });
@@ -35,28 +35,34 @@ router.post('/del', function(req, res, next){
     if(!Array.isArray(imgName)){ // 배열이 아니면
         fs.unlink(`./public/uploads/${imgName}`, err => {
             if (err) throw err;
-            //fnFileLoadHandler();
+            fnFileLoadHandler(res);
         });
+
     } else {
         for(let i = 0; i < imgName.length; i++) {
             fs.unlink(`./public/uploads/${imgName[i]}`, err => {
                 if (err) throw err;
-                //fnFileLoadHandler();
+                if(i == (imgName.length - 1)) {
+                    fnFileLoadHandler(res);
+                }
             });
         }
+
+        
     }
-
-    // 파일 가져오기
-    // function fnFileLoadHandler() {
-    //     let file = new Array();
-
-    //     fs.readdir("./public/uploads", (err, files) => {
-    //         if (err) {
-    //             throw err;
-    //         }
-    //         file = files;
-    //         return res.json(file); 
-    //     });
-    // }
 });
+
+// 파일 가져오기
+function fnFileLoadHandler(res) {
+    let file = new Array();
+
+    fs.readdir("./public/uploads", (err, files) => {
+        if (err) {
+            throw err;
+        }
+        file = files;
+        res.json(file); 
+    });
+}
+
 module.exports = router;
