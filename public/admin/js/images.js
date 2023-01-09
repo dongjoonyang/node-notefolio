@@ -42,39 +42,48 @@ $(function() {
     $("#delBtn").on("click", function() {
         let parameter = $("#delForm").serializeObject();
         let listHtml = "";
+        let chkCount = $("input[name='image']:checked").length;
 
         // 객체가 빈값이면 true
-        if($.isEmptyObject(parameter)) return false;
+        if($.isEmptyObject(parameter)) {
+            alert("선택된 건이 없습니다.");
+            return false;
+        }
 
-        $.ajax({
-            type : "post",
-            url : "/admin/images/del",
-            dataType : "JSON",
-            data : parameter
-        })
-        .done(function(result){
-            $(".images__list").empty();
+        let chkCountFlag = window.confirm(chkCount + "건이 삭제됩니다. 삭제하면 되돌릴 수 없습니다.");
 
-            if(Array.isArray(result) && result.length === 0) { 
-                listHtml += "<strong>데이터가 없습니다.</strong>"
-                $(".images__list").append(listHtml);
-                fnAllChkHandler(); 
-            } else {
-                for(let i = 0; i < result.length; i++){
-                    listHtml += "<li class='images__list--item'>";
-                    listHtml += "<label>";
-                    listHtml += `<input type='checkbox' name='image' value='${result[i]}'>`;
-                    listHtml += `<img src='/uploads/${result[i]}'>`;
-                    listHtml += "</label>";
-                    listHtml += `<span>${result[i]}</span>`;
-                    listHtml += "</li>";
+        if(chkCountFlag) {
+            $.ajax({
+                type : "post",
+                url : "/admin/images/del",
+                dataType : "JSON",
+                data : parameter
+            })
+            .done(function(result){
+                $(".images__list").empty();
+    
+                if(Array.isArray(result) && result.length === 0) {
+                    $(".images__mng").hide();
+                    listHtml += "<strong>데이터가 없습니다.</strong>"
+                    $(".images__list").append(listHtml);
+                    fnAllChkHandler(); 
+                } else {
+                    for(let i = 0; i < result.length; i++){
+                        listHtml += "<li class='images__list--item'>";
+                        listHtml += "<label>";
+                        listHtml += `<input type='checkbox' name='image' value='${result[i]}'>`;
+                        listHtml += `<img src='/uploads/${result[i]}'>`;
+                        listHtml += "</label>";
+                        listHtml += `<span>${result[i]}</span>`;
+                        listHtml += "</li>";
+                    }
+                    $(".images__list").append(listHtml);
+                    fnAllChkHandler(); 
                 }
-                $(".images__list").append(listHtml);
-                fnAllChkHandler(); 
-            }
-        })
-        .fail(function(xhr, status, errorThrown){
-            console.log("이미지 업로드 파일 삭제 Ajax failed");
-        })
+            })
+            .fail(function(xhr, status, errorThrown){
+                console.log("이미지 업로드 파일 삭제 Ajax failed");
+            })
+        }
     })
 });
