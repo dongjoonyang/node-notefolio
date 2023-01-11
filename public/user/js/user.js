@@ -143,8 +143,9 @@ function fnNoteList(json){
 */
 function fnMainInfinityScroll(json) {
     let mainId = $("#subCategory .active").data("mainId");
+    let noteLastItem = document.querySelector('.note-item:last-child');
 
-    $("#scroll-observer").show();
+    $("#scroll-observer").addClass('on');
 
     const lastCardObserver = new IntersectionObserver(entries => {
         const lastCard = entries[0];
@@ -168,13 +169,15 @@ function fnMainInfinityScroll(json) {
                 console.log("페이징 불러오기 Ajax failed");
             });
         } else {
-            $("#scroll-observer").hide();
+            $("#scroll-observer").removeClass('on');
         }
+        if(noteLastItem === null) return;
         lastCardObserver.observe(document.querySelector('.note-item:last-child'));
         
     },{})
 
-    lastCardObserver.observe(document.querySelector('.note-item:last-child'))
+    if(noteLastItem === null) return;
+    lastCardObserver.observe(document.querySelector('.note-item:last-child'));
 }
 
 /**
@@ -185,8 +188,9 @@ function fnMainInfinityScroll(json) {
 function fnSubInfinityScroll(json) {
     let mainId = $("#subCategory .active").data("mainId");
     let subId = $("#subCategory .active").data("subId");
+    let noteLastItem = document.querySelector('.note-item:last-child');
 
-    $("#scroll-observer").show();
+    $("#scroll-observer").addClass('on');
 
     const lastCardObserver = new IntersectionObserver(entries => {
         const lastCard = entries[0];
@@ -210,11 +214,12 @@ function fnSubInfinityScroll(json) {
                 console.log("서브 게시판 및 카테고리 Ajax failed")
             });   
         } else {
-            $("#scroll-observer").hide();
+            $("#scroll-observer").removeClass('on');
         }
+        if(noteLastItem === null) return;
         lastCardObserver.observe(document.querySelector('.note-item:last-child'))
     },{})
-
+    if(noteLastItem === null) return;
     lastCardObserver.observe(document.querySelector('.note-item:last-child'))
 }
 

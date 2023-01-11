@@ -18,6 +18,11 @@ $(function() {
     fileTarget.on('change', function(){
         if(window.FileReader){
             // 파일명 추출
+            if($(this)[0].files[0] === undefined) {
+                $('.upload-name').val('');
+                return ;
+            } ; 
+
             let filename = $(this)[0].files[0].name;
             $(this).siblings('.upload-name').val(filename);
         } 
@@ -39,6 +44,7 @@ $(function() {
 
         if(window.FileReader){
             //image 파일만
+            if($(this)[0].files[0] === undefined) return ; // 에러 처리
             if (!$(this)[0].files[0].type.match(/image\//)) return;
             
             let reader = new FileReader();
